@@ -3,15 +3,31 @@ import styled from "styled-components";
 import { StyledCircle } from "../components/loginComponents/circle";
 import LoginBox from "../components/loginComponents/loginBox";
 import { FlexRow } from "../components/sharedComponents";
-import "./login.css";
 const OutSideBox = styled(FlexRow)`
   justify-content: center;
   align-items: center;
+  height: 100vh;
 `;
 class Login extends Component {
   state = {
+    account: {
+      username: "",
+      password: "",
+    },
     showModal: false,
     showCircle: true,
+  };
+  //   constructor(props) {
+  //     super(props);
+  //     document.getElementById("body").className = "hiddenOverflowY";
+  //   }
+  handleSubmit = (e) => {
+    console.log("submitted", this.state.account);
+  };
+  handleChange = (e) => {
+    const account = { ...this.state.account };
+    account[e.currentTarget.id] = e.currentTarget.value;
+    this.setState({ account });
   };
   componentDidMount() {
     setTimeout(() => {
@@ -25,7 +41,7 @@ class Login extends Component {
         <StyledCircle checkOverflowY={this.state.showCircle} />
         <StyledCircle checkOverflowY={this.state.showCircle} />
         <StyledCircle checkOverflowY={this.state.showCircle} />
-        <LoginBox />
+        <LoginBox onSubmit={this.handleSubmit} onChange={this.handleChange} />
       </OutSideBox>
     );
   }

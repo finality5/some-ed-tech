@@ -7,32 +7,24 @@ const StyledForm = styled(Form)`
   width: 80%;
 `;
 class LoginForm extends Component {
-  state = {
-    username: "",
-    password: "",
-  };
-  handleSubmit = (e) => {};
-  handleChange = (e) => {
-    console.log(e.currentTarget.id);
-  };
   render() {
     return (
-      <StyledForm onSubmit={this.handleSubmit}>
+      <StyledForm onSubmit={this.props.onSubmit}>
         <Form.Field>
-          <label htmlFor="Username">Username</label>
+          <label htmlFor="username">Username</label>
           <input
             autoFocus
             placeholder="Username"
-            id="Username"
-            onChange={this.handleChange}
+            id="username"
+            onChange={this.props.onChange}
           />
         </Form.Field>
         <Form.Field>
-          <label htmlFor="Password">Password</label>
+          <label htmlFor="password">Password</label>
           <input
-            id="Password"
+            id="password"
             placeholder="Password"
-            onChange={this.handleChange}
+            onChange={this.props.onChange}
           />
         </Form.Field>
         <Button

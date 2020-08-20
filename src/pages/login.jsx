@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import auth from "../firebase";
 import { StyledCircle } from "../components/loginComponents/circle";
 import LoginBox from "../components/loginComponents/loginBox";
 import { FlexRow } from "../components/sharedComponents";
@@ -14,15 +15,26 @@ class Login extends Component {
       username: "",
       password: "",
     },
+    currentUser: "",
+    message: "",
     showModal: false,
     showCircle: true,
   };
-  //   constructor(props) {
-  //     super(props);
-  //     document.getElementById("body").className = "hiddenOverflowY";
-  //   }
+
   handleSubmit = (e) => {
-    console.log("submitted", this.state.account);
+    const { username: email, password } = this.state.account;
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then((response) => {
+        this.setState({
+          currentUser: response.user,
+        });
+      })
+      .catch((error) => {
+        this.setState({
+          message: error.message,
+        });
+      });
   };
   handleChange = (e) => {
     const account = { ...this.state.account };
@@ -30,6 +42,14 @@ class Login extends Component {
     this.setState({ account });
   };
   componentDidMount() {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        console.log(user.email);
+        this.setState({
+          currentUser: user,
+        });
+      }
+    });
     setTimeout(() => {
       this.setState({ showModal: true, showCircle: false });
     }, 2000);

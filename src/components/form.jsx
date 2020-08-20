@@ -30,6 +30,7 @@ class LoginForm extends Component {
         <Button
           style={{ alignSelf: "center", marginTop: "1.5rem", width: "70%" }}
           color="vk"
+          onClick={this.props.onSubmit}
         >
           Submit
         </Button>

@@ -38,7 +38,7 @@ const LoginBox = (props) => {
       <TextHeader>Login</TextHeader>
       <LoginForm onSubmit={props.onSubmit} onChange={props.onChange} />
       <ForgetPasswordBox>
-        <a href="#" style={{ color: "black", marginRight: "0.5em" }}>
+        <a href="/" style={{ color: "black", marginRight: "0.5em" }}>
           Go to Select Role Page
         </a>
         <a href="/" style={{ cursor: "pointer" }}>

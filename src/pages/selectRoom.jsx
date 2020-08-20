@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Search, Button, Grid, Header, Segment } from "semantic-ui-react";
+import { Search, Button } from "semantic-ui-react";
 import { FlexRow } from "../components/sharedComponents";
 const OutSideBox = styled(FlexRow)`
   flex-direction: column;

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import Login from "./pages/login";
+import Register from "./pages/register";
 import SelectRole from "./pages/selectRole";
 import SelectRoom from "./pages/selectRoom";
 import NotFound from "./pages/notFound";
@@ -12,6 +13,7 @@ class App extends Component {
       <React.Fragment>
         <Switch>
           <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
           <Route path="/role" component={SelectRole} />
           <Route path="/room" component={SelectRoom} />
           <Route path="/not-found" component={NotFound} />

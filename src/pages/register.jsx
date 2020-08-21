@@ -1,45 +1,37 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import auth from "../firebase";
-import { StyledCircle } from "../components/loginComponents/circle";
-import LoginForm from "../components/loginComponents/loginForm";
+import RegisterForm from "../components/registerComponents/registerForm";
 import { FlexRow } from "../components/sharedComponents";
-
 const OutSideBox = styled(FlexRow)`
   justify-content: center;
   align-items: center;
   height: 100vh;
 `;
-class Login extends Component {
+class Register extends Component {
   state = {
     account: {
+      firstname: "",
+      lastname: "",
       username: "",
       password: "",
     },
-    currentUser: "",
     message: "",
-    showModal: false,
-    showCircle: true,
     required: {
+      firstname: false,
+      lastname: false,
       username: false,
       password: false,
     },
   };
+
   handleSubmit = (e) => {
     const { username: email, password } = this.state.account;
     if (this.validateRequiredField()) {
-      auth
-        .signInWithEmailAndPassword(email, password)
-        .then((response) => {
-          this.setState({
-            currentUser: response.user,
-          });
-        })
-        .catch((error) => {
-          this.setState({
-            message: error.message,
-          });
-        });
+      auth.createUserWithEmailAndPassword(email, password).catch((error) => {
+        this.setState({ message: error.message });
+        console.log(error.message);
+      });
     }
   };
   validateRequiredField = () => {
@@ -67,26 +59,19 @@ class Login extends Component {
     this.setState({ account });
   };
   componentDidMount() {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        console.log(user.uid);
-        this.setState({
-          currentUser: user,
-        });
-      }
-    });
-    setTimeout(() => {
-      this.setState({ showModal: true, showCircle: false });
-    }, 2000);
+    // auth.onAuthStateChanged((user) => {
+    //   if (user) {
+    //     console.log(user.uid);
+    //     this.setState({
+    //       currentUser: user,
+    //     });
+    //   }
+    // });
   }
   render() {
     return (
       <OutSideBox>
-        <StyledCircle checkOverflowY={this.state.showCircle} />
-        <StyledCircle checkOverflowY={this.state.showCircle} />
-        <StyledCircle checkOverflowY={this.state.showCircle} />
-        <StyledCircle checkOverflowY={this.state.showCircle} />
-        <LoginForm
+        <RegisterForm
           onSubmit={this.handleSubmit}
           onChange={this.handleChange}
           isRequired={this.state.required}
@@ -97,4 +82,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default Register;

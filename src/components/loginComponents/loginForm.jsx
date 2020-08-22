@@ -1,13 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { Icon, Form } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import { Icon, Form, Divider, Button } from "semantic-ui-react";
 import { FadeIn } from "../fade";
 import CreateForm from "../form";
-const StyledForm = styled(Form)`
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-`;
 const FormBoxArea = styled.div`
   display: flex;
   flex-direction: column;
@@ -20,6 +16,12 @@ const FormBoxArea = styled.div`
     width: 65%;
   }
 `;
+const StyledForm = styled(Form)`
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+`;
+
 const ImgHeader = styled(Icon)``;
 const TextHeader = styled.p`
   font-size: 2rem;
@@ -32,14 +34,17 @@ const InformationBox = styled.div`
   width: 80%;
   padding: 0.5rem 0 0.5rem 0;
   background-color: #ecf0f1;
-  font-size: 0.75em;
+  font-size: 1em;
   margin-top: 2rem;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
 `;
 class LoginForm extends CreateForm {
+  constructor(props) {
+    super(props);
+    document.getElementById("body").className = "whiteTheme";
+  }
   render() {
     const { onSubmit, onChange, isRequired, errorMessage } = this.props;
-    console.log(errorMessage);
     return (
       <FormBoxArea>
         <ImgHeader name="key" size="big" color="brown" circular />
@@ -69,13 +74,21 @@ class LoginForm extends CreateForm {
 
           {this.renderButton("Submit", "vk")}
         </StyledForm>
+        <Divider horizontal>OR</Divider>
+        <Button
+          onClick={() => {
+            this.props.history.push("/register");
+          }}
+          color="teal"
+        >
+          <Icon name="add" />
+          Create New Account
+        </Button>
         <InformationBox>
-          <a href="/" style={{ color: "black", marginRight: "0.5em" }}>
-            Go to Select Role Page
-          </a>
-          <a href="/" style={{ cursor: "pointer" }}>
-            Click Here.
-          </a>
+          Join as a &nbsp;
+          <Link to="/role" style={{ cursor: "pointer" }}>
+            guest.
+          </Link>
         </InformationBox>
       </FormBoxArea>
     );

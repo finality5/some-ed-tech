@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Icon, Form } from "semantic-ui-react";
 import { FadeIn } from "../fade";
@@ -37,7 +38,6 @@ const InformationBox = styled.div`
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
 `;
 class RegisterForm extends CreateForm {
-  state = {};
   render() {
     const { onSubmit, onChange, isRequired, errorMessage } = this.props;
     return (
@@ -83,12 +83,10 @@ class RegisterForm extends CreateForm {
           {this.renderButton("Create Account", "vk")}
         </StyledForm>
         <InformationBox>
-          <a href="/" style={{ color: "black", marginRight: "0.5em" }}>
-            Go to Select Role Page
-          </a>
-          <a href="/" style={{ cursor: "pointer" }}>
-            Click Here.
-          </a>
+          Have Existing Account ? &nbsp;
+          <Link to="/login" style={{ cursor: "pointer" }}>
+            Sign In.
+          </Link>
         </InformationBox>
       </FormBoxArea>
     );

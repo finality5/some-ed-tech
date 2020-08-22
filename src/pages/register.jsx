@@ -6,7 +6,7 @@ import { FlexRow } from "../components/sharedComponents";
 const OutSideBox = styled(FlexRow)`
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  margin: 4rem 0rem;
 `;
 class Register extends Component {
   state = {
@@ -28,6 +28,7 @@ class Register extends Component {
   handleSubmit = (e) => {
     const { username: email, password } = this.state.account;
     if (this.validateRequiredField()) {
+      this.setState({ message: "" });
       auth.createUserWithEmailAndPassword(email, password).catch((error) => {
         this.setState({ message: error.message });
         console.log(error.message);

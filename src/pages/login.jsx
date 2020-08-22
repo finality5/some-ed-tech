@@ -8,7 +8,7 @@ import { FlexRow } from "../components/sharedComponents";
 const OutSideBox = styled(FlexRow)`
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  margin: 5rem 0rem;
 `;
 class Login extends Component {
   state = {
@@ -33,6 +33,7 @@ class Login extends Component {
         .then((response) => {
           this.setState({
             currentUser: response.user,
+            message: "",
           });
         })
         .catch((error) => {
@@ -80,6 +81,7 @@ class Login extends Component {
     }, 2000);
   }
   render() {
+    console.log(this.props.history);
     return (
       <OutSideBox>
         <StyledCircle checkOverflowY={this.state.showCircle} />
@@ -91,6 +93,7 @@ class Login extends Component {
           onChange={this.handleChange}
           isRequired={this.state.required}
           errorMessage={this.state.message}
+          {...this.props}
         />
       </OutSideBox>
     );

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { Redirect } from "react-router-dom";
 import auth from "../firebase";
 import { StyledCircle } from "../components/loginComponents/circle";
 import LoginForm from "../components/loginComponents/loginForm";
 import { FlexRow } from "../components/sharedComponents";
-
 const OutSideBox = styled(FlexRow)`
   justify-content: center;
   align-items: center;
@@ -12,6 +12,7 @@ const OutSideBox = styled(FlexRow)`
 `;
 class Login extends Component {
   state = {
+    isLoggedIn: false,
     account: {
       username: "",
       password: "",
@@ -25,12 +26,17 @@ class Login extends Component {
       password: false,
     },
   };
+  constructor(props) {
+    super(props);
+    document.getElementById("body").className = "whiteTheme";
+  }
   handleSubmit = (e) => {
     const { username: email, password } = this.state.account;
     if (this.validateRequiredField()) {
       auth
         .signInWithEmailAndPassword(email, password)
         .then((response) => {
+          window.location = "/role";
           this.setState({
             currentUser: response.user,
             message: "",
@@ -69,10 +75,11 @@ class Login extends Component {
   };
   componentDidMount() {
     auth.onAuthStateChanged((user) => {
+      console.log("user", user);
       if (user) {
-        console.log(user.uid);
         this.setState({
           currentUser: user,
+          isLoggedIn: true,
         });
       }
     });
@@ -81,8 +88,7 @@ class Login extends Component {
     }, 2000);
   }
   render() {
-    console.log(this.props.history);
-    return (
+    return !this.state.isLoggedIn ? (
       <OutSideBox>
         <StyledCircle checkOverflowY={this.state.showCircle} />
         <StyledCircle checkOverflowY={this.state.showCircle} />
@@ -96,6 +102,8 @@ class Login extends Component {
           {...this.props}
         />
       </OutSideBox>
+    ) : (
+      <Redirect to="/role" />
     );
   }
 }

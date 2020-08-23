@@ -12,6 +12,7 @@ const Input = ({
     <React.Fragment>
       <label htmlFor={htmlFor}>{HeaderName}</label>
       <input
+        autoComplete="off"
         type={type}
         autoFocus={autoFocus}
         placeholder={placeholder}

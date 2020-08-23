@@ -1,9 +1,14 @@
 import React from "react";
-import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { Icon, Form, Divider, Button } from "semantic-ui-react";
+import styled from "styled-components";
+import { Icon, Form } from "semantic-ui-react";
 import { FadeIn } from "../fade";
 import CreateForm from "../form";
+const StyledForm = styled(Form)`
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+`;
 const FormBoxArea = styled.div`
   display: flex;
   flex-direction: column;
@@ -16,12 +21,6 @@ const FormBoxArea = styled.div`
     width: 65%;
   }
 `;
-const StyledForm = styled(Form)`
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-`;
-
 const ImgHeader = styled(Icon)``;
 const TextHeader = styled.p`
   font-size: 2rem;
@@ -34,34 +33,32 @@ const InformationBox = styled.div`
   width: 80%;
   padding: 0.5rem 0 0.5rem 0;
   background-color: #ecf0f1;
-  font-size: 1em;
+  font-size: 0.75em;
   margin-top: 2rem;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
 `;
-class LoginForm extends CreateForm {
-  
+class SetupPasswordForm extends CreateForm {
   render() {
     const { onSubmit, onChange, isRequired, errorMessage } = this.props;
     return (
       <FormBoxArea>
-        <ImgHeader name="key" size="big" color="brown" circular />
-        <TextHeader>Sign In</TextHeader>
+        <ImgHeader name="wpforms" size="big" color="brown" circular />
+        <TextHeader>Setup Password</TextHeader>
         <StyledForm onSubmit={onSubmit}>
-          {this.renderInput(
-            "Email",
-            "username",
-            true,
-            onChange,
-            isRequired.username,
-            "text"
-          )}
-          <input type="password" style={{ display: "none" }} />
           {this.renderInput(
             "Password",
             "password",
-            false,
+            true,
             onChange,
             isRequired.password,
+            "password"
+          )}
+          {this.renderInput(
+            "Confirm password",
+            "confirmPassword",
+            false,
+            onChange,
+            isRequired.confirmPassword,
             "password"
           )}
           {errorMessage ? (
@@ -71,23 +68,12 @@ class LoginForm extends CreateForm {
           ) : (
             <p style={{ display: "none" }}>NOTHING</p>
           )}
-
-          {this.renderButton("Submit", "vk")}
+          {this.renderButton("Confirm", "vk")}
         </StyledForm>
-        <Divider horizontal>OR</Divider>
-        <Button
-          onClick={() => {
-            this.props.history.push("/register");
-          }}
-          color="teal"
-        >
-          <Icon name="add" />
-          Create New Account
-        </Button>
         <InformationBox>
-          Join as a &nbsp;
-          <Link to="/role" style={{ cursor: "pointer" }}>
-            guest.
+          Have Existing Account ? &nbsp;
+          <Link to="/login" style={{ cursor: "pointer" }}>
+            Sign In.
           </Link>
         </InformationBox>
       </FormBoxArea>
@@ -95,4 +81,4 @@ class LoginForm extends CreateForm {
   }
 }
 
-export default LoginForm;
+export default SetupPasswordForm;

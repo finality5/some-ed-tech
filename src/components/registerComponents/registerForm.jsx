@@ -16,7 +16,7 @@ const FormBoxArea = styled.div`
   align-items: center;
   padding: 2rem 0 2rem 0;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
-  animation: ${FadeIn} 3s linear both;
+  animation: ${FadeIn} 1s linear both;
   @media (max-width: 850px) {
     width: 65%;
   }
@@ -46,32 +46,28 @@ class RegisterForm extends CreateForm {
         <TextHeader>Register</TextHeader>
         <StyledForm onSubmit={onSubmit}>
           {this.renderInput(
-            "Firstname",
-            "firstname",
+            "Display name",
+            "displayName",
             true,
             onChange,
-            isRequired.firstname
+            isRequired.displayName,
+            "text"
           )}
           {this.renderInput(
-            "Lastname",
-            "lastname",
-            false,
-            onChange,
-            isRequired.lastname
-          )}
-          {this.renderInput(
-            "Username",
+            "Email",
             "username",
             false,
             onChange,
-            isRequired.username
+            isRequired.username,
+            "text"
           )}
           {this.renderInput(
             "Password",
             "password",
             false,
             onChange,
-            isRequired.password
+            isRequired.password,
+            "password"
           )}
           {errorMessage ? (
             <p style={{ marginLeft: "0.5rem", color: "salmon" }}>

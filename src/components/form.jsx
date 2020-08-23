@@ -10,10 +10,10 @@ class CreateForm extends Component {
       >
         {label}
       </Button>
-    );
+    ); 
   };
 
-  renderInput = (name, id, autoFocus, onChange, required) => {
+  renderInput = (name, id, autoFocus, onChange, required, type) => {
     return (
       <Form.Field
         required
@@ -23,7 +23,8 @@ class CreateForm extends Component {
         }}
       >
         <Input
-          type={id === "password" ? id : "text"}
+
+          type={type}
           autoFocus={autoFocus}
           htmlFor={id}
           id={id}

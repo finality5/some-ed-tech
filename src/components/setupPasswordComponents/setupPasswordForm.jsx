@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Icon, Form } from "semantic-ui-react";
-import { FadeIn } from "../fade";
+import { FadeIn } from "../sharedComponents";
 import CreateForm from "../form";
 const StyledForm = styled(Form)`
   display: flex;

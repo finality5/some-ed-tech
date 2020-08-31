@@ -1,16 +1,24 @@
 import React, { Component } from "react";
+import styled from "styled-components";
 import { Button, Form } from "semantic-ui-react";
 import Input from "./input";
+import { Spinner } from "./sharedComponents";
+const StyledButton = styled(Button)`
+  &.ui.button {
+    align-self: center;
+    margin-top: 1.5rem;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+  }
+`;
 class CreateForm extends Component {
-  renderButton = (label, color) => {
+  renderButton = (label, color, isLoading) => {
     return (
-      <Button
-        style={{ alignSelf: "center", marginTop: "1.5rem", width: "70%" }}
-        color={color}
-      >
-        {label}
-      </Button>
-    ); 
+      <StyledButton color={color} isLoading={isLoading}>
+        {isLoading ? <Spinner /> : label}
+      </StyledButton>
+    );
   };
 
   renderInput = (name, id, autoFocus, onChange, required, type) => {
@@ -23,7 +31,6 @@ class CreateForm extends Component {
         }}
       >
         <Input
-
           type={type}
           autoFocus={autoFocus}
           htmlFor={id}

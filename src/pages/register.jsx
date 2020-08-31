@@ -10,6 +10,7 @@ const OutSideBox = styled(FlexRow)`
 `;
 class Register extends Component {
   state = {
+    isLoading: false,
     account: {
       displayName: "",
       username: "",
@@ -29,16 +30,16 @@ class Register extends Component {
   handleSubmit = () => {
     const { username: email, password, displayName } = this.state.account;
     if (this.validateRequiredField()) {
-      this.setState({ message: "" });
+      this.setState({ message: "", isLoading: true });
       auth
         .createUserWithEmailAndPassword(email, password)
         .then(() => {
-          console.log("regis success");
           this.updateUserProfile(displayName);
+          this.setState({ isLoading: false });
+          window.location = "./role";
         })
         .catch((error) => {
-          this.setState({ message: error.message });
-          console.log("error");
+          this.setState({ message: error.message, isLoading: false });
         });
     }
   };
@@ -88,6 +89,7 @@ class Register extends Component {
           onChange={this.handleChange}
           isRequired={this.state.required}
           errorMessage={this.state.message}
+          isLoading={this.state.isLoading}
         />
       </OutSideBox>
     );

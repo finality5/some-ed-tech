@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { FadeIn } from "../sharedComponents";
 import { Icon, Form, Divider, Button } from "semantic-ui-react";
-import { FadeIn } from "../fade";
 import CreateForm from "../form";
 const FormBoxArea = styled.div`
   display: flex;
@@ -39,9 +39,14 @@ const InformationBox = styled.div`
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
 `;
 class LoginForm extends CreateForm {
-  
   render() {
-    const { onSubmit, onChange, isRequired, errorMessage } = this.props;
+    const {
+      onSubmit,
+      onChange,
+      isRequired,
+      errorMessage,
+      isLoading,
+    } = this.props;
     return (
       <FormBoxArea>
         <ImgHeader name="key" size="big" color="brown" circular />
@@ -72,7 +77,7 @@ class LoginForm extends CreateForm {
             <p style={{ display: "none" }}>NOTHING</p>
           )}
 
-          {this.renderButton("Submit", "vk")}
+          {this.renderButton("Submit", "vk", isLoading)}
         </StyledForm>
         <Divider horizontal>OR</Divider>
         <Button

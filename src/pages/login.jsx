@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Redirect } from "react-router-dom";
 import auth from "../firebase";
-import { StyledCircle } from "../components/loginComponents/circle";
 import LoginForm from "../components/loginComponents/loginForm";
-import { FlexRow } from "../components/sharedComponents";
+import { FlexRow, StyledCircle } from "../components/sharedComponents";
 const OutSideBox = styled(FlexRow)`
   justify-content: center;
   align-items: center;
@@ -13,6 +12,7 @@ const OutSideBox = styled(FlexRow)`
 class Login extends Component {
   state = {
     isLoggedIn: false,
+    isLoading: false,
     account: {
       username: "",
       password: "",
@@ -33,6 +33,7 @@ class Login extends Component {
   handleSubmit = (e) => {
     const { username: email, password } = this.state.account;
     if (this.validateRequiredField()) {
+      this.setState({ isLoading: true });
       auth
         .signInWithEmailAndPassword(email, password)
         .then((response) => {
@@ -40,11 +41,13 @@ class Login extends Component {
           this.setState({
             currentUser: response.user,
             message: "",
+            isLoading: false,
           });
         })
         .catch((error) => {
           this.setState({
             message: error.message,
+            isLoading: false,
           });
         });
     }
@@ -99,6 +102,7 @@ class Login extends Component {
           onChange={this.handleChange}
           isRequired={this.state.required}
           errorMessage={this.state.message}
+          isLoading={this.state.isLoading}
           {...this.props}
         />
       </OutSideBox>

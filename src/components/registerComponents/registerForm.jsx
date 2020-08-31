@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Icon, Form } from "semantic-ui-react";
-import { FadeIn } from "../fade";
 import CreateForm from "../form";
+import { FadeIn } from "../sharedComponents";
 const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
@@ -39,7 +39,13 @@ const InformationBox = styled.div`
 `;
 class RegisterForm extends CreateForm {
   render() {
-    const { onSubmit, onChange, isRequired, errorMessage } = this.props;
+    const {
+      onSubmit,
+      onChange,
+      isRequired,
+      errorMessage,
+      isLoading,
+    } = this.props;
     return (
       <FormBoxArea>
         <ImgHeader name="wpforms" size="big" color="brown" circular />
@@ -76,7 +82,7 @@ class RegisterForm extends CreateForm {
           ) : (
             <p style={{ display: "none" }}>NOTHING</p>
           )}
-          {this.renderButton("Create Account", "vk")}
+          {this.renderButton("Create Account", "vk", isLoading)}
         </StyledForm>
         <InformationBox>
           Have Existing Account ? &nbsp;

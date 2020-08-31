@@ -27,30 +27,17 @@ const RoleArea = styled(FlexRow)`
 
 class SelectRole extends Component {
   state = {
-    displayName: "-",
-    isLoggedIn: false,
+    displayName: "",
     showLoading: false,
   };
   constructor(props) {
     super(props);
     document.getElementById("body").className = "darkTheme";
   }
-  componentDidMount() {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        var displayName = user.displayName;
-        // var email = user.email;
-        // var emailVerified = user.emailVerified;
-        // var photoURL = user.photoURL;
-        // var isAnonymous = user.isAnonymous;
-        // var uid = user.uid;
-        // var providerData = user.providerData;
-        // console.log(user.getIdToken());
-        this.setState({ isLoggedIn: true, displayName });
-        console.log("token", user.uid);
-      } else {
-        console.log("not signed in");
-      }
+  componentDidMount() {}
+  componentWillReceiveProps({ user }) {
+    this.setState({
+      displayName: user,
     });
   }
   handleClickInstructor = () => {
@@ -64,7 +51,8 @@ class SelectRole extends Component {
       .signOut()
       .then(() => {
         window.location = "/login";
-        this.setState({ isLoggedIn: false });
+        localStorage.removeItem("token");
+        this.setState({ displayName: "" });
       })
       .catch((err) => {
         console.log("err", err);
@@ -90,7 +78,7 @@ class SelectRole extends Component {
           />
         </RoleArea>
         <UserInformation
-          isLoggedIn={this.state.isLoggedIn}
+          isLoggedIn={this.state.displayName}
           displayName={this.state.displayName}
           onLogout={this.handleLogout}
           onSignIn={this.handleSignIn}

@@ -11,8 +11,6 @@ const OutSideBox = styled(FlexRow)`
 `;
 class Login extends Component {
   state = {
-    isLoggedIn: false,
-    isLoading: false,
     account: {
       username: "",
       password: "",
@@ -25,6 +23,7 @@ class Login extends Component {
       username: false,
       password: false,
     },
+    isLoading: false,
   };
   constructor(props) {
     super(props);
@@ -67,9 +66,10 @@ class Login extends Component {
     if (requiredStatus.includes(true)) {
       this.setState({ message: "Please complete the required field." });
       return false;
-    } else {
-      return true;
-    }
+    } else return true;
+  };
+  redirectWhenLoggedInAlready = () => {
+    window.location = "./role";
   };
   handleChange = (e) => {
     const account = { ...this.state.account };
@@ -77,21 +77,17 @@ class Login extends Component {
     this.setState({ account });
   };
   componentDidMount() {
-    auth.onAuthStateChanged((user) => {
-      console.log("user", user);
-      if (user) {
-        this.setState({
-          currentUser: user,
-          isLoggedIn: true,
-        });
-      }
-    });
     setTimeout(() => {
       this.setState({ showModal: true, showCircle: false });
     }, 2000);
   }
+  componentWillReceiveProps({ user }) {
+    this.setState({
+      currentUser: user,
+    });
+  }
   render() {
-    return !this.state.isLoggedIn ? (
+    return !this.state.currentUser ? (
       <OutSideBox>
         <StyledCircle checkOverflowY={this.state.showCircle} />
         <StyledCircle checkOverflowY={this.state.showCircle} />
@@ -107,7 +103,7 @@ class Login extends Component {
         />
       </OutSideBox>
     ) : (
-      <Redirect to="/role" />
+      this.redirectWhenLoggedInAlready()
     );
   }
 }

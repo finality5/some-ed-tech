@@ -9,9 +9,11 @@ const FormBoxArea = styled.div`
   flex-direction: column;
   width: 30%;
   align-items: center;
-  padding: 2rem 0 2rem 0;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+  padding: 3rem 0 3rem 0;
+  box-shadow: 0px 0px 20px #f4e4cc;
+  border-radius: 5px;
   animation: ${FadeIn} 3s linear both;
+  background-color: white;
   @media (max-width: 850px) {
     width: 65%;
   }
@@ -37,6 +39,7 @@ const InformationBox = styled.div`
   font-size: 1em;
   margin-top: 2rem;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+  font-weight: 600;
 `;
 class LoginForm extends CreateForm {
   render() {
@@ -92,8 +95,9 @@ class LoginForm extends CreateForm {
         <InformationBox>
           Join as a &nbsp;
           <Link to="/role" style={{ cursor: "pointer" }}>
-            guest.
+            guest. &nbsp;
           </Link>
+          <Icon name="spy" />
         </InformationBox>
       </FormBoxArea>
     );

@@ -19,8 +19,8 @@ const StyledDisplayName = styled.p`
     color: white;
   }
 `;
-const UserInformation = ({ isLoggedIn, displayName, onLogout, onSignIn }) => {
-  return isLoggedIn ? (
+const UserInformation = ({ displayName, onLogout, onSignIn }) => {
+  return displayName ? (
     <UserInformationBox>
       <StyledDisplayName>Logged In As : {displayName}</StyledDisplayName>
       <Button color="red" onClick={onLogout}>

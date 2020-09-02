@@ -2,13 +2,11 @@ import React, { Component } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import Login from "./pages/login";
 import Register from "./pages/register";
-import SetupPassword from "./pages/setupPassword";
 import SelectRole from "./pages/selectRole";
 import SelectRoom from "./pages/selectRoom";
 import NotFound from "./pages/notFound";
 import "semantic-ui-css/semantic.min.css";
 import "./index.css";
-import VerifyEmail from "./pages/verifyEmail";
 import auth from "./firebase";
 class App extends Component {
   state = { user: "" };
@@ -40,8 +38,7 @@ class App extends Component {
             render={(props) => <Login {...props} user={this.state.user} />}
           />
           <Route path="/register" component={Register} />
-          <Route path="/verify" component={VerifyEmail} />
-          <Route path="/setup-password" component={SetupPassword} />
+
           <Route
             path="/role"
             render={(props) => <SelectRole {...props} user={this.state.user} />}

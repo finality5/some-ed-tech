@@ -35,8 +35,6 @@ class Register extends Component {
         .createUserWithEmailAndPassword(email, password)
         .then(() => {
           this.updateUserProfile(displayName);
-          this.setState({ isLoading: false });
-          window.location = "./role";
         })
         .catch((error) => {
           this.setState({ message: error.message, isLoading: false });
@@ -45,13 +43,14 @@ class Register extends Component {
   };
   updateUserProfile = (displayName) => {
     const user = auth.currentUser;
-    console.log(user);
     user
       .updateProfile({
         displayName: displayName,
       })
       .then(() => {
         console.log("update profile successfully.");
+        this.setState({ isLoading: false });
+        window.location = "./role";
       })
       .catch(() => {
         console.log("cannot update profile information.");

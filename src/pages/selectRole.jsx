@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import auth from "../firebase";
 import { Role } from "../components/roleComponents/role";
-import UserInformation from "../components/roleComponents/userInformation";
-
+import UserInformation from "../components/userInformation";
 import { FlexRow } from "../components/sharedComponents";
 const ContentBox = styled(FlexRow)`
   position: relative;
@@ -34,17 +33,16 @@ class SelectRole extends Component {
     super(props);
     document.getElementById("body").className = "darkTheme";
   }
-  componentDidMount() {}
   componentWillReceiveProps({ user }) {
     this.setState({
       displayName: user,
     });
   }
   handleClickInstructor = () => {
-    window.location = "/login";
+    window.location = "/room";
   };
   handleClickAudience = () => {
-    window.location = "/login";
+    window.location = "/room";
   };
   handleLogout = () => {
     auth

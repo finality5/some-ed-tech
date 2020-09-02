@@ -35,11 +35,13 @@ const StyledCard = styled(Card)`
 `;
 const ManageRoom = styled(Icon)`
   &.icon {
+    opacity: 0.5;
     position: absolute;
+    top: 10%;
     right: 5%;
     cursor: pointer;
-    transition: 0.05s;
     :hover {
+      opacity: 1;
       transform: scale(1.25);
     }
   }
@@ -78,16 +80,15 @@ class RoomCard extends Component {
       instName,
       roomStatus,
       audienceCount,
+      onDelete,
+      onJoin,
     } = this.props;
     return (
       <StyledCard
         style={{
-          border:
-            roomStatus === "running"
-              ? "solid 1.5px #079992"
-              : roomStatus === "idle"
-              ? "solid 2px #4a69bd"
-              : "solid 2px #e55039",
+          padding: "1rem",
+          margin: "1rem 1rem",
+          borderRadius: "2rem",
           boxShadow:
             roomStatus === "running"
               ? "0px 0px 12px lightgreen"
@@ -98,7 +99,11 @@ class RoomCard extends Component {
         running={roomStatus === "running" ? true : false}
       >
         <Card.Content>
-          <ManageRoom name="remove circle" style={{ color: "red" }} />
+          <ManageRoom
+            name="remove circle"
+            style={{ color: "red" }}
+            onClick={() => onDelete(id)}
+          />
           <Card.Header>{topicName}</Card.Header>
           <Card.Meta>Time : {time}</Card.Meta>
           <Card.Description>Instructor : {instName}</Card.Description>
@@ -118,7 +123,12 @@ class RoomCard extends Component {
             {roomStatus === "running" ? (
               <div>
                 <Divider />
-                <StyledJoinButton content="JOIN" color="google plus" fluid />
+                <StyledJoinButton
+                  content="JOIN"
+                  color="google plus"
+                  fluid
+                  onClick={() => onJoin(id)}
+                />
               </div>
             ) : (
               <p style={{ display: "none" }} />

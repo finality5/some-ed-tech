@@ -1,20 +1,22 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Card, Divider } from "semantic-ui-react";
+import UserInformation from "../components/userInformation";
 import RoomCard from "../components/roomCard";
-import { FlexRow } from "../components/sharedComponents";
+
 const TextHeader = styled.p`
   font-size: 2rem;
   font-weight: 400;
 `;
 class SelectRoom extends Component {
   state = {
+    displayName: "",
     data: [
       {
         id: "1",
         topicName: "Data Mining",
         time: "10.00 -11.00 A.M.",
-        instName: "Kitsata Waiyamai",
+        instName: "Kitsana Waiyamai",
         roomStatus: "running",
         audienceCount: "20",
       },
@@ -37,7 +39,7 @@ class SelectRoom extends Component {
 
       {
         id: "4",
-        topicName: "RUNNING ROOM",
+        topicName: "Computer Graphic",
         time: "9.00 -12.00 A.M.",
         instName: "Taweedech Sirithanapipat",
         roomStatus: "running",
@@ -45,33 +47,49 @@ class SelectRoom extends Component {
       },
       {
         id: "5",
-        topicName: "NOT RUNNING ROOM",
+        topicName: "Digital Signal Processing",
         time: "9.00 -12.00 A.M.",
-        instName: "Taweedech Sirithanapipat",
+        instName: "Charay Lertsudvichai",
         roomStatus: "idle",
         audienceCount: "1",
       },
       {
         id: "6",
-        topicName: "DELETED ROOM",
+        topicName: "Operating System",
+        time: "9.00 -12.00 A.M.",
+        instName: "Putchong Utayopas",
+        roomStatus: "deleted",
+        audienceCount: "1",
+      },
+      {
+        id: "7",
+        topicName: "Project Preparation",
+        time: "9.00 -12.00 A.M.",
+        instName: "Pradondech Nilakubta",
+        roomStatus: "running",
+        audienceCount: "20",
+      },
+      {
+        id: "8",
+        topicName: "Innovative Thinking",
+        time: "9.00 -12.00 A.M.",
+        instName: "Sitthichai Un-On",
+        roomStatus: "deleted",
+        audienceCount: "1",
+      },
+      {
+        id: "9",
+        topicName: "Advanced Mechanic 500",
         time: "9.00 -12.00 A.M.",
         instName: "Taweedech Sirithanapipat",
         roomStatus: "deleted",
         audienceCount: "1",
       },
       {
-        id: "7",
-        topicName: "RUNNING ROOM",
-        time: "9.00 -12.00 A.M.",
-        instName: "Taweedech Sirithanapipat",
-        roomStatus: "running",
-        audienceCount: "20",
-      },
-      {
         id: "8",
-        topicName: "DELETED ROOM",
+        topicName: "Innovative Thinking",
         time: "9.00 -12.00 A.M.",
-        instName: "Taweedech Sirithanapipat",
+        instName: "Sutthichai",
         roomStatus: "deleted",
         audienceCount: "1",
       },
@@ -81,6 +99,17 @@ class SelectRoom extends Component {
   handleSearchChange = (e) => {
     this.setState({ value: e.currentTarget.value });
   };
+  handleJoin = (id) => {
+    console.log("Join room ID : ", id);
+  };
+  handleDelete = (id) => {
+    console.log("Deleted room ID : ", id);
+  };
+  componentWillReceiveProps({ user }) {
+    this.setState({
+      displayName: user,
+    });
+  }
   separateDataByRoomStatus = () => {
     const data = [...this.state.data];
     const runningTopic = [];
@@ -99,6 +128,10 @@ class SelectRoom extends Component {
     const deletedTopic = this.separateDataByRoomStatus()[2];
     return (
       <div style={{ padding: "4rem" }}>
+        <UserInformation
+          isLoggedIn={this.state.displayName}
+          displayName={this.state.displayName}
+        />
         <TextHeader>RUNNING ROOM</TextHeader>
         <Card.Group>
           {runningTopic.map((topic) => {
@@ -118,6 +151,8 @@ class SelectRoom extends Component {
                 instName={instName}
                 roomStatus={roomStatus}
                 audienceCount={audienceCount}
+                onDelete={this.handleDelete}
+                onJoin={this.handleJoin}
               />
             );
           })}
@@ -142,6 +177,8 @@ class SelectRoom extends Component {
                 instName={instName}
                 roomStatus={roomStatus}
                 audienceCount={audienceCount}
+                onDelete={this.handleDelete}
+                onJoin={this.handleJoin}
               />
             );
           })}
@@ -166,6 +203,8 @@ class SelectRoom extends Component {
                 instName={instName}
                 roomStatus={roomStatus}
                 audienceCount={audienceCount}
+                onDelete={this.handleDelete}
+                onJoin={this.handleJoin}
               />
             );
           })}

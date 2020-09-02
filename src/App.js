@@ -26,7 +26,12 @@ class App extends Component {
         this.setState({
           user: user.displayName,
         });
-      } else console.log("not logged in yet.");
+      } else {
+        this.setState({
+          user: "",
+        });
+        console.log("not logged in yet.");
+      }
     });
   }
   render() {
@@ -43,7 +48,10 @@ class App extends Component {
             path="/role"
             render={(props) => <SelectRole {...props} user={this.state.user} />}
           />
-          <Route path="/room" component={SelectRoom} />
+          <Route
+            path="/room"
+            render={(props) => <SelectRoom {...props} user={this.state.user} />}
+          />
           <Route path="/not-found" component={NotFound} />
           <Redirect from="/" exact to="/role" />
           <Redirect to="/not-found" />

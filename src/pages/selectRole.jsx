@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import auth from "../firebase";
+
 import { Role } from "../components/roleComponents/role";
 import UserInformation from "../components/userInformation";
 import { FlexRow } from "../components/sharedComponents";
@@ -44,21 +44,7 @@ class SelectRole extends Component {
   handleClickAudience = () => {
     window.location = "/room";
   };
-  handleLogout = () => {
-    auth
-      .signOut()
-      .then(() => {
-        window.location = "/login";
-        localStorage.removeItem("token");
-        this.setState({ displayName: "" });
-      })
-      .catch((err) => {
-        console.log("err", err);
-      });
-  };
-  handleSignIn = () => {
-    window.location = "/login";
-  };
+
   render() {
     return (
       <ContentBox>

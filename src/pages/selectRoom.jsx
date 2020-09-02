@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Card, Divider } from "semantic-ui-react";
+import { Card, Divider, Button, Icon } from "semantic-ui-react";
 import UserInformation from "../components/userInformation";
 import RoomCard from "../components/roomCard";
 
@@ -73,7 +73,7 @@ class SelectRoom extends Component {
         id: "8",
         topicName: "Innovative Thinking",
         time: "9.00 -12.00 A.M.",
-        instName: "Sitthichai Un-On",
+        instName: "Sitthichai Sri-On",
         roomStatus: "deleted",
         audienceCount: "1",
       },
@@ -132,83 +132,104 @@ class SelectRoom extends Component {
           isLoggedIn={this.state.displayName}
           displayName={this.state.displayName}
         />
-        <TextHeader>RUNNING ROOM</TextHeader>
-        <Card.Group>
-          {runningTopic.map((topic) => {
-            const {
-              id,
-              topicName,
-              time,
-              instName,
-              roomStatus,
-              audienceCount,
-            } = topic;
-            return (
-              <RoomCard
-                id={id}
-                topicName={topicName}
-                time={time}
-                instName={instName}
-                roomStatus={roomStatus}
-                audienceCount={audienceCount}
-                onDelete={this.handleDelete}
-                onJoin={this.handleJoin}
-              />
-            );
-          })}
-        </Card.Group>
-        <Divider style={{ margin: "3rem 0" }} />
-        <TextHeader>IDLE ROOM</TextHeader>
-        <Card.Group>
-          {idleTopic.map((topic) => {
-            const {
-              id,
-              topicName,
-              time,
-              instName,
-              roomStatus,
-              audienceCount,
-            } = topic;
-            return (
-              <RoomCard
-                id={id}
-                topicName={topicName}
-                time={time}
-                instName={instName}
-                roomStatus={roomStatus}
-                audienceCount={audienceCount}
-                onDelete={this.handleDelete}
-                onJoin={this.handleJoin}
-              />
-            );
-          })}
-        </Card.Group>
-        <Divider style={{ margin: "3rem 0" }} />
-        <TextHeader>DELETED ROOM</TextHeader>
-        <Card.Group>
-          {deletedTopic.map((topic) => {
-            const {
-              id,
-              topicName,
-              time,
-              instName,
-              roomStatus,
-              audienceCount,
-            } = topic;
-            return (
-              <RoomCard
-                id={id}
-                topicName={topicName}
-                time={time}
-                instName={instName}
-                roomStatus={roomStatus}
-                audienceCount={audienceCount}
-                onDelete={this.handleDelete}
-                onJoin={this.handleJoin}
-              />
-            );
-          })}
-        </Card.Group>
+        <Button style={{ marginBottom: "2rem" }} color="linkedin">
+          <Icon name="plus" /> Add New Room
+        </Button>
+        {runningTopic.length !== 0 ? (
+          <React.Fragment>
+            <TextHeader>RUNNING ROOM</TextHeader>
+            <Card.Group>
+              {runningTopic.map((topic) => {
+                const {
+                  id,
+                  topicName,
+                  time,
+                  instName,
+                  roomStatus,
+                  audienceCount,
+                } = topic;
+                return (
+                  <RoomCard
+                    id={id}
+                    topicName={topicName}
+                    time={time}
+                    instName={instName}
+                    roomStatus={roomStatus}
+                    audienceCount={audienceCount}
+                    onDelete={this.handleDelete}
+                    onJoin={this.handleJoin}
+                  />
+                );
+              })}
+            </Card.Group>
+            <Divider style={{ margin: "3rem 0" }} />
+          </React.Fragment>
+        ) : (
+          <p style={{ display: "none" }} />
+        )}
+        {idleTopic.length !== 0 ? (
+          <React.Fragment>
+            <TextHeader>IDLE ROOM</TextHeader>
+            <Card.Group>
+              {idleTopic.map((topic) => {
+                const {
+                  id,
+                  topicName,
+                  time,
+                  instName,
+                  roomStatus,
+                  audienceCount,
+                } = topic;
+                return (
+                  <RoomCard
+                    id={id}
+                    topicName={topicName}
+                    time={time}
+                    instName={instName}
+                    roomStatus={roomStatus}
+                    audienceCount={audienceCount}
+                    onDelete={this.handleDelete}
+                    onJoin={this.handleJoin}
+                  />
+                );
+              })}
+            </Card.Group>
+            <Divider style={{ margin: "3rem 0" }} />
+          </React.Fragment>
+        ) : (
+          <p style={{ display: "none" }} />
+        )}
+        {deletedTopic.length !== 0 ? (
+          <React.Fragment>
+            <TextHeader>DELETED ROOM</TextHeader>
+            <Card.Group>
+              {deletedTopic.map((topic) => {
+                const {
+                  id,
+                  topicName,
+                  time,
+                  instName,
+                  roomStatus,
+                  audienceCount,
+                } = topic;
+                return (
+                  <RoomCard
+                    id={id}
+                    topicName={topicName}
+                    time={time}
+                    instName={instName}
+                    roomStatus={roomStatus}
+                    audienceCount={audienceCount}
+                    onDelete={this.handleDelete}
+                    onJoin={this.handleJoin}
+                  />
+                );
+              })}
+            </Card.Group>
+          </React.Fragment>
+        ) : (
+          <p style={{ display: "none" }}></p>
+        )}
       </div>
     );
   }

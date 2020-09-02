@@ -82,6 +82,7 @@ class RoomCard extends Component {
       audienceCount,
       onDelete,
       onJoin,
+      blank,
     } = this.props;
     return (
       <StyledCard

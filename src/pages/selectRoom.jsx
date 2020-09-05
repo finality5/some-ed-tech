@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Card, Divider, Button, Icon } from "semantic-ui-react";
+import { Card, Divider, Button, Icon, Modal, Input } from "semantic-ui-react";
 import UserInformation from "../components/userInformation";
 import RoomCard from "../components/roomCard";
+// import Input from "../components/input";
 
 const TextHeader = styled.p`
   font-size: 2rem;
   font-weight: 400;
 `;
+
 class SelectRoom extends Component {
   state = {
     displayName: "",
@@ -94,16 +96,20 @@ class SelectRoom extends Component {
         audienceCount: "1",
       },
     ],
-  };
-
-  handleSearchChange = (e) => {
-    this.setState({ value: e.currentTarget.value });
+    openAddRoomModal: false,
+    openCloseModal: false,
+    valueRoomCode: "",
   };
   handleJoin = (id) => {
     console.log("Join room ID : ", id);
   };
   handleDelete = (id) => {
     console.log("Deleted room ID : ", id);
+    this.setState({ openCloseModal: true });
+  };
+  handleChangeValueRoomCode = (e) => {
+    const valueRoomCode = e.currentTarget.value;
+    this.setState({ valueRoomCode });
   };
   componentWillReceiveProps({ user }) {
     this.setState({
@@ -122,6 +128,38 @@ class SelectRoom extends Component {
     });
     return [runningTopic, idleTopic, deletedTopic];
   };
+  separateSection = (topic, section) => {
+    return (
+      <React.Fragment>
+        <TextHeader>{topic}</TextHeader>
+        <Card.Group>
+          {section.map((topic) => {
+            const {
+              id,
+              topicName,
+              time,
+              instName,
+              roomStatus,
+              audienceCount,
+            } = topic;
+            return (
+              <RoomCard
+                id={id}
+                topicName={topicName}
+                time={time}
+                instName={instName}
+                roomStatus={roomStatus}
+                audienceCount={audienceCount}
+                onDelete={this.handleDelete}
+                onJoin={this.handleJoin}
+              />
+            );
+          })}
+        </Card.Group>
+        <Divider style={{ margin: "3rem 0" }} />
+      </React.Fragment>
+    );
+  };
   render() {
     const runningTopic = this.separateDataByRoomStatus()[0];
     const idleTopic = this.separateDataByRoomStatus()[1];
@@ -132,101 +170,57 @@ class SelectRoom extends Component {
           isLoggedIn={this.state.displayName}
           displayName={this.state.displayName}
         />
-        <Button style={{ marginBottom: "2rem" }} color="linkedin">
-          <Icon name="plus" /> Add New Room
-        </Button>
+        <Modal
+          style={{
+            padding: "2rem",
+            borderRadius: "50px",
+          }}
+          onOpen={() => {
+            this.setState({ openAddRoomModal: true });
+          }}
+          onClose={() => {
+            this.setState({ openAddRoomModal: false });
+          }}
+          open={this.state.openAddRoomModal}
+          trigger={
+            <Button style={{ marginBottom: "2rem" }} color="linkedin">
+              <Icon name="plus" /> Add New Room
+            </Button>
+          }
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Input
+              style={{ border: "none" }}
+              htmlFor="codeRoom"
+              id="codeRoom"
+              autoFocus={true}
+              placeholder="Put Your Code Here."
+              onChange={this.handleChangeValueRoomCode}
+              icon="search"
+            />
+
+            <Button style={{ marginLeft: "2rem" }} color="linkedin">
+              JOIN
+            </Button>
+          </div>
+        </Modal>
         {runningTopic.length !== 0 ? (
-          <React.Fragment>
-            <TextHeader>RUNNING ROOM</TextHeader>
-            <Card.Group>
-              {runningTopic.map((topic) => {
-                const {
-                  id,
-                  topicName,
-                  time,
-                  instName,
-                  roomStatus,
-                  audienceCount,
-                } = topic;
-                return (
-                  <RoomCard
-                    id={id}
-                    topicName={topicName}
-                    time={time}
-                    instName={instName}
-                    roomStatus={roomStatus}
-                    audienceCount={audienceCount}
-                    onDelete={this.handleDelete}
-                    onJoin={this.handleJoin}
-                  />
-                );
-              })}
-            </Card.Group>
-            <Divider style={{ margin: "3rem 0" }} />
-          </React.Fragment>
+          this.separateSection("Running Room", runningTopic)
         ) : (
           <p style={{ display: "none" }} />
         )}
         {idleTopic.length !== 0 ? (
-          <React.Fragment>
-            <TextHeader>IDLE ROOM</TextHeader>
-            <Card.Group>
-              {idleTopic.map((topic) => {
-                const {
-                  id,
-                  topicName,
-                  time,
-                  instName,
-                  roomStatus,
-                  audienceCount,
-                } = topic;
-                return (
-                  <RoomCard
-                    id={id}
-                    topicName={topicName}
-                    time={time}
-                    instName={instName}
-                    roomStatus={roomStatus}
-                    audienceCount={audienceCount}
-                    onDelete={this.handleDelete}
-                    onJoin={this.handleJoin}
-                  />
-                );
-              })}
-            </Card.Group>
-            <Divider style={{ margin: "3rem 0" }} />
-          </React.Fragment>
+          this.separateSection("Idle Room", idleTopic)
         ) : (
           <p style={{ display: "none" }} />
         )}
         {deletedTopic.length !== 0 ? (
-          <React.Fragment>
-            <TextHeader>DELETED ROOM</TextHeader>
-            <Card.Group>
-              {deletedTopic.map((topic) => {
-                const {
-                  id,
-                  topicName,
-                  time,
-                  instName,
-                  roomStatus,
-                  audienceCount,
-                } = topic;
-                return (
-                  <RoomCard
-                    id={id}
-                    topicName={topicName}
-                    time={time}
-                    instName={instName}
-                    roomStatus={roomStatus}
-                    audienceCount={audienceCount}
-                    onDelete={this.handleDelete}
-                    onJoin={this.handleJoin}
-                  />
-                );
-              })}
-            </Card.Group>
-          </React.Fragment>
+          this.separateSection("Deleted Room", deletedTopic)
         ) : (
           <p style={{ display: "none" }}></p>
         )}

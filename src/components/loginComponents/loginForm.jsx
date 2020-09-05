@@ -63,7 +63,6 @@ class LoginForm extends CreateForm {
             isRequired.username,
             "text"
           )}
-          <input type="password" style={{ display: "none" }} />
           {this.renderInput(
             "Password",
             "password",

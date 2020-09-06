@@ -88,7 +88,7 @@ class SelectRoom extends Component {
         audienceCount: "1",
       },
       {
-        id: "8",
+        id: "10",
         topicName: "Innovative Thinking",
         time: "9.00 -12.00 A.M.",
         instName: "Sutthichai",
@@ -97,7 +97,7 @@ class SelectRoom extends Component {
       },
     ],
     openAddRoomModal: false,
-    openCloseModal: false,
+    idDeletedModal: 0,
     valueRoomCode: "",
   };
   handleJoin = (id) => {
@@ -105,7 +105,6 @@ class SelectRoom extends Component {
   };
   handleDelete = (id) => {
     console.log("Deleted room ID : ", id);
-    this.setState({ openCloseModal: true });
   };
   handleChangeValueRoomCode = (e) => {
     const valueRoomCode = e.currentTarget.value;
@@ -128,6 +127,7 @@ class SelectRoom extends Component {
     });
     return [runningTopic, idleTopic, deletedTopic];
   };
+
   separateSection = (topic, section) => {
     return (
       <React.Fragment>
@@ -152,6 +152,8 @@ class SelectRoom extends Component {
                 audienceCount={audienceCount}
                 onDelete={this.handleDelete}
                 onJoin={this.handleJoin}
+                onOpenDeletedModal={this.handleDeletedModal}
+                idDeletedModal={this.state.idDeletedModal}
               />
             );
           })}
@@ -159,6 +161,10 @@ class SelectRoom extends Component {
         <Divider style={{ margin: "3rem 0" }} />
       </React.Fragment>
     );
+  };
+  handleDeletedModal = (id) => {
+    const idDeletedModal = id;
+    this.setState({ idDeletedModal });
   };
   render() {
     const runningTopic = this.separateDataByRoomStatus()[0];
@@ -174,6 +180,7 @@ class SelectRoom extends Component {
           style={{
             padding: "2rem",
             borderRadius: "50px",
+            boxShadow: "0px 0px 20px black",
           }}
           onOpen={() => {
             this.setState({ openAddRoomModal: true });
@@ -204,7 +211,7 @@ class SelectRoom extends Component {
               icon="search"
             />
 
-            <Button style={{ marginLeft: "2rem" }} color="linkedin">
+            <Button style={{ marginLeft: "2rem" }} color="linkedin" circular>
               JOIN
             </Button>
           </div>

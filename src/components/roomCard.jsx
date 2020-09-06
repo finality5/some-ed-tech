@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled, { keyframes } from "styled-components";
-import { Card, Icon, Button, Divider } from "semantic-ui-react";
+import { Card, Icon, Button, Divider, Modal } from "semantic-ui-react";
 const Woop = keyframes`
   0% {
       transform: scale(1);
@@ -65,8 +65,10 @@ const DeletedIconStatus = styled(Icon)`
     color: red;
   }
 `;
-const StyledJoinButton = styled(Button)`
-  &.button {
+const StyledJoinButton = styled(Button)``;
+const StyledModal = styled(Modal)`
+  &.dimmer {
+    background-color: red !important;
   }
 `;
 const RoomStatus = styled.div``;
@@ -82,7 +84,8 @@ class RoomCard extends Component {
       audienceCount,
       onDelete,
       onJoin,
-      blank,
+      onOpenDeletedModal,
+      idDeletedModal,
     } = this.props;
     return (
       <StyledCard
@@ -103,8 +106,51 @@ class RoomCard extends Component {
           <ManageRoom
             name="remove circle"
             style={{ color: "red" }}
-            onClick={() => onDelete(id)}
+            onClick={() => onOpenDeletedModal(id)}
           />
+          <StyledModal
+            style={{
+              padding: "2rem",
+              borderRadius: "50px",
+              boxShadow: "0px 0px 20px salmon",
+            }}
+            // onOpen={() => onOpenDeletedModal()}
+            onClose={() => onOpenDeletedModal(0)}
+            open={id === idDeletedModal ? true : false}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <h3>
+                Confirm Your &nbsp;
+                <h3 style={{ color: "gray", display: "inline" }}>
+                  {topicName}
+                </h3>
+                &nbsp; Room Deletion ?
+              </h3>
+              <div>
+                <Button
+                  color="red"
+                  style={{ margin: "0.5rem 1.5rem 0rem 0rem" }}
+                  onClick={() => onDelete(id)}
+                >
+                  Deleted
+                </Button>
+                <Button
+                  color="black"
+                  style={{ margin: "0.5rem 0rem 0rem 1.5rem" }}
+                  onClick={() => onOpenDeletedModal(0)}
+                >
+                  Cancel
+                </Button>
+              </div>
+            </div>
+          </StyledModal>
           <Card.Header>{topicName}</Card.Header>
           <Card.Meta>Time : {time}</Card.Meta>
           <Card.Description>Instructor : {instName}</Card.Description>

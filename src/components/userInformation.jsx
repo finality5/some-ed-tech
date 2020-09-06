@@ -16,31 +16,49 @@ const UserInformationBox = styled.div`
   transform: translateY(-75%);
   background: #95a5a6;
   z-index: 1;
+  /* @media (max-width: 800px) {
+    width: 70%;
+  } */
   :hover {
     transform: translateX(0);
     background: white;
   }
 `;
 const StyledDisplayName = styled.p`
-  max-width: 25rem;
+  max-width: 20rem;
   word-wrap: break-word;
   margin: 0rem 3rem 0rem 0rem;
-  font-size: 1.25em;
+  font-size: 1.1em;
   font-weight: 500;
   padding: 0.5rem;
   box-shadow: 0px 0px 10px black;
   border-radius: 0.75rem;
+  @media (max-width: 800px) {
+    font-size: 0.75em;
+    margin: 0rem 1rem 0rem 0rem;
+  }
 `;
 const StyledRank = styled.p`
+  max-width: 20rem;
   padding: 0.5rem;
   display: block;
-  max-width: 25rem;
   word-wrap: break-word;
   margin: 0rem 3rem 0rem 0rem;
-  font-size: 1.25em;
+  font-size: 1.1em;
   font-weight: 500;
   box-shadow: 0px 0px 10px #8e44ad;
   border-radius: 0.75rem;
+  @media (max-width: 800px) {
+    font-size: 0.75em;
+    margin: 0rem 1rem 0rem 0rem;
+  }
+`;
+const StyledButton = styled(Button)`
+  @media (max-width: 800px) {
+    &.button {
+      font-size: 0.75em;
+    }
+  }
 `;
 class UserInformation extends Component {
   state = {};
@@ -68,7 +86,7 @@ class UserInformation extends Component {
           Rank : Platinum &nbsp;
           <Icon name="chess queen" />
         </StyledRank>
-        <Button
+        <StyledButton
           style={{
             alignSelf: "center",
             marginRight: "1rem",
@@ -76,14 +94,14 @@ class UserInformation extends Component {
           color="linkedin"
         >
           Statistics
-        </Button>
-        <Button
+        </StyledButton>
+        <StyledButton
           style={{ alignSelf: "center" }}
           color="red"
           onClick={this.handleLogout}
         >
           LOGOUT
-        </Button>
+        </StyledButton>
         <Icon
           name="angle down"
           style={{

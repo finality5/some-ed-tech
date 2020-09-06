@@ -27,9 +27,10 @@ class Register extends Component {
     super(props);
     document.getElementById("body").className = "whiteTheme";
   }
+
   handleSubmit = () => {
     const { username: email, password, displayName } = this.state.account;
-    if (this.validateRequiredField()) {
+    if (this.validateRequiredField() && this.validateMaximumCharacters()) {
       this.setState({ message: "", isLoading: true });
       auth
         .createUserWithEmailAndPassword(email, password)
@@ -75,12 +76,21 @@ class Register extends Component {
       return true;
     }
   };
+  validateMaximumCharacters = () => {
+    if (this.state.account.displayName.length >= 12) {
+      this.setState({ message: "Maximum Display name is 12 characters." });
+      return false;
+    } else {
+      return true;
+    }
+  };
   handleChange = (e) => {
     const account = { ...this.state.account };
     account[e.currentTarget.id] = e.currentTarget.value;
     this.setState({ account });
   };
   render() {
+    console.log(this.state.account.displayName.length);
     return (
       <OutSideBox>
         <RegisterForm

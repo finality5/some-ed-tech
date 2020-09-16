@@ -62,32 +62,33 @@ const MovedCircleNorthEast = keyframes`
 `;
 const MovedCircleSouthWest = keyframes`
   0% { opacity:0.5;
-      transform:translateX(0);
+        transform:translateX(0);
   }
   40%{
-      transform:translateX(-100%);
+        transform:translateX(-100%);
   }
-  100%{opacity:0;
-     transform:translateY(60%);
+  100%{
+        opacity:0;
+        transform:translateY(60%);
   }
 `;
 const MovedCircleSouthEast = keyframes`
-  0% { opacity:0.5;
-      transform:translateX(0);
+  0% { 
+        opacity:0.5;
+        transform:translateX(0);
   }
   40%{
-      transform:translateX(100%);
+        transform:translateX(100%);
   }
   70%{
-     transform:translateY(60%);
+        transform:translateY(60%);
   }
-   100%{opacity:0;
-     transform:translateX(0);
+   100%{
+        opacity:0;
+        transform:translateX(0);
   }
 `;
-
 export const StyledCircle = styled.div`
-  /* display: ${(props) => (props.checkOverflowY ? "static" : "none")}; */
   background: greenyellow;
   position: absolute;
   height: 300px;

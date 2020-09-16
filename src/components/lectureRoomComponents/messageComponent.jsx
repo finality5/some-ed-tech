@@ -41,7 +41,6 @@ const StyledOwner = styled.div`
 `;
 const StyledText = styled.div``;
 const MessageComponent = ({ owner, text, isAnonymous, onReply, onDelete }) => {
-  console.log(isAnonymous);
   return (
     <StyledMessage isAnonymous={isAnonymous}>
       <StyledInformation>

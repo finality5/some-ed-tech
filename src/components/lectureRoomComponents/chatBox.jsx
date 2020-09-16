@@ -4,6 +4,7 @@ import { Input, Checkbox, Button, Icon } from "semantic-ui-react";
 import MessageComponent from "./messageComponent";
 import { FlexColumn } from "../sharedComponents";
 const StyledChatBoxArea = styled(FlexColumn)`
+  position: absolute;
   align-items: center;
   margin-top: 3.5rem;
 `;
@@ -19,13 +20,36 @@ const StyledChatBox = styled.div`
   border-radius: 5px;
   overflow-y: auto;
   transition: 0.5s;
+  ::-webkit-scrollbar {
+    background: white;
+  }
+`;
+const StyledHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: ${(props) => (props.isAnonymous ? "#2d3436" : "white")};
+  /* box-shadow: ${(props) =>
+    props.isAnonymous
+      ? "0px 0px 15px whitesmoke"
+      : "0px 0px 15px rgba(0, 0, 0, 0.15)"}; */
+  width: 80%;
+  font-size: 2em;
+  font-weight: 400;
+  color: ${(props) => (props.isAnonymous ? "white" : "black")};
+  margin-bottom: 0.5rem;
+  padding: 1.5rem;
+  border-radius: 5px;
+  transition: 0.5s;
 `;
 const GimmicksArea = styled.div`
   width: 80%;
   padding: 1rem 2rem;
+  margin: 0.25rem 0rem;
   border-radius: 5px;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
   transition: 0.5s;
+  background-color: white;
+  z-index: 0;
 `;
 const InputArea = styled.div`
   width: 80%;
@@ -47,9 +71,25 @@ class ChatBox extends Component {
       onChangeInputValue,
       onReply,
       onDelete,
+      onCloseChatRoom,
     } = this.props;
+
     return (
       <StyledChatBoxArea>
+        <StyledHeader isAnonymous={isAnonymous}>
+          <div>
+            Q & A &nbsp;
+            <Icon
+              style={{ fontSize: "0.9em" }}
+              name="question circle outline"
+            />
+          </div>
+          <Icon
+            style={{ color: "red", cursor: "pointer" }}
+            name="times circle outline"
+            onClick={onCloseChatRoom}
+          />
+        </StyledHeader>
         <StyledChatBox isAnonymous={isAnonymous}>
           <MessageComponent
             owner="Speaker1"
@@ -60,7 +100,21 @@ class ChatBox extends Component {
           />
           <MessageComponent
             owner="Speaker2"
-            text="Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?v"
+            text="Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yovu repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?v"
+            onReply={onReply}
+            onDelete={onDelete}
+            isAnonymous={isAnonymous}
+          />
+          <MessageComponent
+            owner="Speaker2"
+            text="Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yovu repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?v"
+            onReply={onReply}
+            onDelete={onDelete}
+            isAnonymous={isAnonymous}
+          />
+          <MessageComponent
+            owner="Speaker2"
+            text="Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yovu repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?v"
             onReply={onReply}
             onDelete={onDelete}
             isAnonymous={isAnonymous}

@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import ChatBox from "../components/lectureRoomComponents/chatBox";
-import styled from "styled-components";
-
 class Lecture extends Component {
   state = {
+    isAnonymous: true,
     inputFields: {
       questionText: "",
     },
@@ -13,8 +12,29 @@ class Lecture extends Component {
     inputFields[e.currentTarget.id] = e.currentTarget.value;
     this.setState({ inputFields });
   };
+  handleSelectAnonymous = () => {
+    this.setState({ isAnonymous: !this.state.isAnonymous });
+  };
+  handleSendMessage = () => {
+    console.log("MSG SENDED");
+  };
+  handleReply = () => {
+    console.log("REPLY");
+  };
+  handleDelete = () => {
+    console.log("DELETED");
+  };
   render() {
-    return <ChatBox onChangeInputValue={this.handleChangeInputValue} />;
+    return (
+      <ChatBox
+        onChangeInputValue={this.handleChangeInputValue}
+        onSelectAnonymous={this.handleSelectAnonymous}
+        isAnonymous={this.state.isAnonymous}
+        onSendMessage={this.handleSendMessage}
+        onReply={this.handleReply}
+        onDelete={this.handleDelete}
+      />
+    );
   }
 }
 

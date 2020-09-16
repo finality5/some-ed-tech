@@ -1,57 +1,113 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Input, Checkbox, Button, Icon } from "semantic-ui-react";
+import MessageComponent from "./messageComponent";
 import { FlexColumn } from "../sharedComponents";
 const StyledChatBoxArea = styled(FlexColumn)`
   align-items: center;
-  border: solid 2px green;
+  margin-top: 3.5rem;
 `;
 const StyledChatBox = styled.div`
+  background-color: ${(props) => (props.isAnonymous ? "#2d3436" : "white")};
+  box-shadow: ${(props) =>
+    props.isAnonymous
+      ? "0px 0px 15px whitesmoke"
+      : "0px 0px 15px rgba(0, 0, 0, 0.15)"};
   width: 80%;
   padding: 0px 2rem;
   height: 500px;
-  border: solid 2px salmon;
   border-radius: 5px;
   overflow-y: auto;
-`;
-const StyledMessage = styled.div`
-  margin: 0.75rem 0rem;
-  border: solid 2px salmon;
+  transition: 0.5s;
 `;
 const GimmicksArea = styled.div`
   width: 80%;
   padding: 1rem 2rem;
-  border: solid 2px salmon;
+  border-radius: 5px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+  transition: 0.5s;
 `;
 const InputArea = styled.div`
   width: 80%;
-  padding: 0rem 2rem;
-  border: solid 2px salmon;
+  background-color: ${(props) => (props.isAnonymous ? "#2d3436" : "white")};
+  display: flex;
+  flex-direction: row;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+  transition: 0.5s;
 `;
 class ChatBox extends Component {
   state = {};
   render() {
+    const {
+      isAnonymous,
+      onSelectAnonymous,
+      onSendMessage,
+      onChangeInputValue,
+      onReply,
+      onDelete,
+    } = this.props;
     return (
       <StyledChatBoxArea>
-        <StyledChatBox>
-          <StyledMessage>Speaker 1 : Hello</StyledMessage>
-          <StyledMessage>Speaker 2 : Hi</StyledMessage>
+        <StyledChatBox isAnonymous={isAnonymous}>
+          <MessageComponent
+            owner="Speaker1"
+            text="Hello !"
+            onReply={onReply}
+            onDelete={onDelete}
+            isAnonymous={isAnonymous}
+          />
+          <MessageComponent
+            owner="Speaker2"
+            text="Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?v"
+            onReply={onReply}
+            onDelete={onDelete}
+            isAnonymous={isAnonymous}
+          />
         </StyledChatBox>
-        <GimmicksArea>
-          <Checkbox label="Anonymous" toggle />
+        <GimmicksArea isAnonymous={isAnonymous}>
+          <Checkbox
+            label="Anonymous Question"
+            defaultChecked={true}
+            toggle
+            onClick={onSelectAnonymous}
+          />
+          {isAnonymous ? (
+            <span style={{ marginLeft: "0.5rem", color: "green" }}>
+              Activated <Icon name="check circle outline" />
+            </span>
+          ) : (
+            <span style={{ marginLeft: "0.5rem", color: "red" }}>
+              Not Activated <Icon name="times circle outline" />
+            </span>
+          )}
+          &nbsp;
+          <Icon name="spy" />
         </GimmicksArea>
-        <InputArea>
+        <InputArea isAnonymous={isAnonymous}>
           <Input
-            style={{ width: "100%" }}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") onSendMessage();
+            }}
+            style={{
+              width: "100%",
+              boxShadow: "0px 0px 1px black",
+              marginRight: "2rem",
+            }}
             id="questionText"
             placeholder="Type Your Question Here."
-            onChange={this.props.onChangeInputValue}
-            icon={
-              <Button color="linkedin">
-                SEND &nbsp; <Icon name="send" />
-              </Button>
-            }
+            onChange={onChangeInputValue}
           />
+          <Button
+            color={!isAnonymous ? "linkedin" : "vk"}
+            icon
+            labelPosition="left"
+            onClick={onSendMessage}
+          >
+            <Icon name="send" />
+            SEND
+          </Button>
         </InputArea>
       </StyledChatBoxArea>
     );

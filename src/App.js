@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import Login from "./pages/login";
+import Lecture from "./pages/lecture";
 import Register from "./pages/register";
 import SelectRole from "./pages/selectRole";
 import SelectRoom from "./pages/selectRoom";
+import Statistics from "./pages/statistics";
 import NotFound from "./pages/notFound";
 import "semantic-ui-css/semantic.min.css";
 import "./index.css";
@@ -51,6 +53,14 @@ class App extends Component {
           <Route
             path="/room"
             render={(props) => <SelectRoom {...props} user={this.state.user} />}
+          />
+          <Route
+            path="/lecture"
+            render={(props) => <Lecture {...props} user={this.state.user} />}
+          />
+          <Route
+            path="/stat"
+            render={(props) => <Statistics {...props} user={this.state.user} />}
           />
           <Route path="/not-found" component={NotFound} />
           <Redirect from="/" exact to="/role" />

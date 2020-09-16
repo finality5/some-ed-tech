@@ -92,6 +92,9 @@ class UserInformation extends Component {
             marginRight: "1rem",
           }}
           color="linkedin"
+          onClick={() => {
+            window.location = "./stat";
+          }}
         >
           Statistics
         </StyledButton>

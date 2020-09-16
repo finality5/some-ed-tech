@@ -101,6 +101,7 @@ class SelectRoom extends Component {
     valueRoomCode: "",
   };
   handleJoin = (id) => {
+    window.location = "./lecture";
     console.log("Join room ID : ", id);
   };
   handleDelete = (id) => {
@@ -210,7 +211,6 @@ class SelectRoom extends Component {
               onChange={this.handleChangeValueRoomCode}
               icon="search"
             />
-
             <Button style={{ marginLeft: "2rem" }} color="linkedin" circular>
               JOIN
             </Button>

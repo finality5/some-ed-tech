@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Input, Checkbox, Button, Icon } from "semantic-ui-react";
 import MessageComponent from "./messageComponent";
-import { FlexColumn } from "../sharedComponents";
+import { FlexColumn, FadeIn } from "../sharedComponents";
 const StyledChatBoxArea = styled(FlexColumn)`
   position: absolute;
   align-items: center;
   margin-top: 3.5rem;
+  animation: ${FadeIn} 0.5s linear;
 `;
 const StyledChatBox = styled.div`
   background-color: ${(props) => (props.isAnonymous ? "#2d3436" : "white")};
@@ -16,7 +17,7 @@ const StyledChatBox = styled.div`
       : "0px 0px 15px rgba(0, 0, 0, 0.15)"};
   width: 80%;
   padding: 0px 2rem;
-  height: 500px;
+  height: 400px;
   border-radius: 5px;
   overflow-y: auto;
   transition: 0.5s;
@@ -57,9 +58,22 @@ const InputArea = styled.div`
   display: flex;
   flex-direction: row;
   padding: 1rem 2rem;
+  margin-bottom: 3rem;
   border-radius: 5px;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
   transition: 0.5s;
+`;
+const StyledIcon = styled(Icon)`
+  &.icon {
+    color: red;
+    opacity: 0.5;
+    cursor: pointer;
+    transition: 0.2s;
+    :hover {
+      opacity: 1;
+      transform: scale(1.01);
+    }
+  }
 `;
 class ChatBox extends Component {
   state = {};
@@ -84,11 +98,7 @@ class ChatBox extends Component {
               name="question circle outline"
             />
           </div>
-          <Icon
-            style={{ color: "red", cursor: "pointer" }}
-            name="times circle outline"
-            onClick={onCloseChatRoom}
-          />
+          <StyledIcon name="times circle outline" onClick={onCloseChatRoom} />
         </StyledHeader>
         <StyledChatBox isAnonymous={isAnonymous}>
           <MessageComponent

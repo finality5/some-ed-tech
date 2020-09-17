@@ -38,35 +38,33 @@ class App extends Component {
   }
   render() {
     return (
-      <React.Fragment>
-        <Switch>
-          <Route
-            path="/login"
-            render={(props) => <Login {...props} user={this.state.user} />}
-          />
-          <Route path="/register" component={Register} />
+      <Switch>
+        <Route
+          path="/login"
+          render={(props) => <Login {...props} user={this.state.user} />}
+        />
+        <Route path="/register" component={Register} />
 
-          <Route
-            path="/role"
-            render={(props) => <SelectRole {...props} user={this.state.user} />}
-          />
-          <Route
-            path="/room"
-            render={(props) => <SelectRoom {...props} user={this.state.user} />}
-          />
-          <Route
-            path="/lecture"
-            render={(props) => <Lecture {...props} user={this.state.user} />}
-          />
-          <Route
-            path="/stat"
-            render={(props) => <Statistics {...props} user={this.state.user} />}
-          />
-          <Route path="/not-found" component={NotFound} />
-          <Redirect from="/" exact to="/role" />
-          <Redirect to="/not-found" />
-        </Switch>
-      </React.Fragment>
+        <Route
+          path="/role"
+          render={(props) => <SelectRole {...props} user={this.state.user} />}
+        />
+        <Route
+          path="/room"
+          render={(props) => <SelectRoom {...props} user={this.state.user} />}
+        />
+        <Route
+          path="/lecture"
+          render={(props) => <Lecture {...props} user={this.state.user} />}
+        />
+        <Route
+          path="/stat"
+          render={(props) => <Statistics {...props} user={this.state.user} />}
+        />
+        <Route path="/not-found" component={NotFound} />
+        <Redirect from="/" exact to="/role" />
+        <Redirect to="/not-found" />
+      </Switch>
     );
   }
 }

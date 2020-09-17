@@ -7,6 +7,17 @@ const rotate360 = keyframes`
     transform: rotate(360deg);
   }
 `;
+export const Woop = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
 export const Spinner = styled.div`
   animation: ${rotate360} 1s linear infinite;
   border-bottom: 2px solid white;

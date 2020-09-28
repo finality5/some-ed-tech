@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Input, Checkbox, Button, Icon } from "semantic-ui-react";
 import MessageComponent from "./messageComponent";
-import { FlexColumn, FadeIn } from "../sharedComponents";
+import { FlexColumn, FadeIn } from "../sharedComponents"; 
 const StyledChatBoxArea = styled(FlexColumn)`
   position: absolute;
   align-items: center;
@@ -87,7 +87,7 @@ class ChatBox extends Component {
       onDelete,
       onCloseChatRoom,
     } = this.props;
-
+    console.log(isAnonymous);
     return (
       <StyledChatBoxArea>
         <StyledHeader isAnonymous={isAnonymous}>
@@ -133,7 +133,7 @@ class ChatBox extends Component {
         <GimmicksArea isAnonymous={isAnonymous}>
           <Checkbox
             label="Anonymous Question"
-            defaultChecked={true}
+            defaultChecked={isAnonymous}
             toggle
             onClick={onSelectAnonymous}
           />

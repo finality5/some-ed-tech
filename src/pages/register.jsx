@@ -23,10 +23,6 @@ class Register extends Component {
       password: false,
     },
   };
-  constructor(props) {
-    super(props);
-    document.getElementById("body").className = "whiteTheme";
-  }
 
   handleSubmit = () => {
     const { username: email, password, displayName } = this.state.account;

@@ -14,8 +14,9 @@ const FormBoxArea = styled.div`
   flex-direction: column;
   width: 30%;
   align-items: center;
-  padding: 2rem 0 2rem 0;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+  padding: 3rem 0 3rem 0;
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px #7ed6df;
   animation: ${FadeIn} 1s linear both;
   @media (max-width: 850px) {
     width: 65%;

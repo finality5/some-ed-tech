@@ -18,6 +18,17 @@ export const Woop = keyframes`
     transform: scale(1);
   }
 `;
+export const Active = keyframes`
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  50%{
+    transform: scale(1..5)  rotate(100deg);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+  }
+`;
 export const Spinner = styled.div`
   animation: ${rotate360} 1s linear infinite;
   border-bottom: 2px solid white;
@@ -118,4 +129,13 @@ export const StyledCircle = styled.div`
     background: #ff7979;
     animation: ${MovedCircleSouthEast} 1s linear both;
   }
+`;
+
+export const Circle = styled.div`
+  background: transparent;
+  border: solid 2px;
+  /* position: absolute; */
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
 `;

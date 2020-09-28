@@ -139,7 +139,7 @@ class RoomCard extends Component {
                   style={{ margin: "0.5rem 1.5rem 0rem 0rem" }}
                   onClick={() => onDelete(id)}
                 >
-                  Deleted
+                  Delete
                 </Button>
                 <Button
                   color="black"

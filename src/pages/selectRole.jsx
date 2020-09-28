@@ -61,12 +61,7 @@ class SelectRole extends Component {
             img="user"
           />
         </RoleArea>
-        <UserInformation
-          isLoggedIn={this.state.displayName}
-          displayName={this.state.displayName}
-          onLogout={this.handleLogout}
-          onSignIn={this.handleSignIn}
-        />
+        <UserInformation displayName={this.state.displayName} />
       </ContentBox>
     );
   }

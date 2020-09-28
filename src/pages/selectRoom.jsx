@@ -100,6 +100,10 @@ class SelectRoom extends Component {
     idDeletedModal: 0,
     valueRoomCode: "",
   };
+  constructor(props) {
+    super(props);
+    document.getElementById("body").className = "whiteTheme";
+  }
   handleJoin = (id) => {
     window.location = "./lecture";
     console.log("Join room ID : ", id);

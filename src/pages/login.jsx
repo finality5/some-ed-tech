@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Redirect } from "react-router-dom";
 import auth from "../firebase";
 import LoginForm from "../components/loginComponents/loginForm";
 import { FlexRow, StyledCircle } from "../components/sharedComponents";
@@ -25,10 +24,7 @@ class Login extends Component {
     },
     isLoading: false,
   };
-  constructor(props) {
-    super(props);
-    document.getElementById("body").className = "whiteTheme";
-  }
+
   handleSubmit = (e) => {
     const { username: email, password } = this.state.account;
     if (this.validateRequiredField()) {
@@ -66,7 +62,10 @@ class Login extends Component {
     if (requiredStatus.includes(true)) {
       this.setState({ message: "Please complete the required field." });
       return false;
-    } else return true;
+    } else {
+      this.setState({ message: "" });
+      return true;
+    }
   };
   redirectWhenLoggedInAlready = () => {
     window.location = "./role";

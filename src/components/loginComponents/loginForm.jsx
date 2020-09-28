@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import note from "../../assets/images/note.svg";
+import hat from "../../assets/images/hat.svg";
 import { Link } from "react-router-dom";
 import { FadeIn } from "../sharedComponents";
 import { Icon, Form, Divider, Button } from "semantic-ui-react";
@@ -10,8 +12,8 @@ const FormBoxArea = styled.div`
   width: 30%;
   align-items: center;
   padding: 3rem 0 3rem 0;
-  box-shadow: 0px 0px 20px #f4e4cc;
-  border-radius: 5px;
+  box-shadow: 0px 0px 10px #7ed6df;
+  border-radius: 20px;
   animation: ${FadeIn} 3s linear both;
   background-color: white;
   @media (max-width: 850px) {
@@ -41,6 +43,18 @@ const InformationBox = styled.div`
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
   font-weight: 600;
 `;
+const StyledHat = styled.img`
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  left: 10rem;
+`;
+const StyledNote = styled.img`
+  position: absolute;
+  right: 10rem;
+  width: 50px;
+  height: 50px;
+`;
 class LoginForm extends CreateForm {
   render() {
     const {
@@ -52,6 +66,8 @@ class LoginForm extends CreateForm {
     } = this.props;
     return (
       <FormBoxArea>
+        {/* <StyledHat src={note} />
+        <StyledNote src={hat} /> */}
         <ImgHeader name="key" size="big" color="brown" circular />
         <TextHeader>Sign In</TextHeader>
         <StyledForm onSubmit={onSubmit}>

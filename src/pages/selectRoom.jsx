@@ -13,6 +13,7 @@ const TextHeader = styled.p`
 class SelectRoom extends Component {
   state = {
     displayName: "",
+    role: "instructor",
     data: [
       {
         id: "1",
@@ -95,6 +96,22 @@ class SelectRoom extends Component {
         roomStatus: "deleted",
         audienceCount: "1",
       },
+      {
+        id: "11",
+        topicName: "Innovative Thinking",
+        time: "9.00 -12.00 A.M.",
+        instName: "Sutthichai",
+        roomStatus: "ready",
+        audienceCount: "1",
+      },
+      {
+        id: "12",
+        topicName: "Innovative Thinking",
+        time: "9.00 -12.00 A.M.",
+        instName: "Sutthichai",
+        roomStatus: "ready",
+        audienceCount: "1",
+      },
     ],
     openAddRoomModal: false,
     idDeletedModal: 0,
@@ -104,9 +121,11 @@ class SelectRoom extends Component {
     super(props);
     document.getElementById("body").className = "whiteTheme";
   }
-  handleJoin = (id) => {
+
+  handleJoin = (id, role) => {
+    if (role === "audience") console.log("Join room ID : ", id);
+    else if (role === "instructor") console.log("Starting room ID : ", id);
     window.location = "./lecture";
-    console.log("Join room ID : ", id);
   };
   handleDelete = (id) => {
     console.log("Deleted room ID : ", id);
@@ -125,12 +144,15 @@ class SelectRoom extends Component {
     const runningTopic = [];
     const idleTopic = [];
     const deletedTopic = [];
+    const readyTopic = []; // for inst.
+
     data.map((data) => {
       if (data.roomStatus === "running") runningTopic.push(data);
       else if (data.roomStatus === "idle") idleTopic.push(data);
       else if (data.roomStatus === "deleted") deletedTopic.push(data);
+      else if (data.roomStatus === "ready") readyTopic.push(data); // for inst open.
     });
-    return [runningTopic, idleTopic, deletedTopic];
+    return [runningTopic, idleTopic, deletedTopic, readyTopic];
   };
 
   separateSection = (topic, section) => {
@@ -175,7 +197,8 @@ class SelectRoom extends Component {
     const runningTopic = this.separateDataByRoomStatus()[0];
     const idleTopic = this.separateDataByRoomStatus()[1];
     const deletedTopic = this.separateDataByRoomStatus()[2];
-    return (
+    const readyTopic = this.separateDataByRoomStatus()[3]; //for inst.
+    return this.state.role === "audience" ? (
       <div style={{ padding: "4rem" }}>
         <UserInformation
           isLoggedIn={this.state.displayName}
@@ -220,6 +243,15 @@ class SelectRoom extends Component {
             </Button>
           </div>
         </Modal>
+        <Button
+          color="pink"
+          style={{ marginLeft: "1rem" }}
+          onClick={() => {
+            this.setState({ role: "instructor" });
+          }}
+        >
+          <Icon name="sync" /> Swap Role to the Instructor
+        </Button>
         {runningTopic.length !== 0 ? (
           this.separateSection("Running Room", runningTopic)
         ) : (
@@ -234,6 +266,38 @@ class SelectRoom extends Component {
           this.separateSection("Deleted Room", deletedTopic)
         ) : (
           <p style={{ display: "none" }}></p>
+        )}
+      </div>
+    ) : (
+      <div style={{ padding: "4rem" }}>
+        <UserInformation
+          isLoggedIn={this.state.displayName}
+          displayName={this.state.displayName}
+        />
+        <div style={{ marginBottom: "2rem" }}>
+          <Button
+            color="blue"
+            onClick={() => {
+              window.location = "./createroom";
+            }}
+          >
+            <Icon name="plus" />
+            Create New Room
+          </Button>
+          <Button
+            color="pink"
+            style={{ marginLeft: "1rem" }}
+            onClick={() => {
+              this.setState({ role: "audience" });
+            }}
+          >
+            <Icon name="sync" /> Swap Role to the Audience
+          </Button>
+        </div>
+        {readyTopic.length !== 0 ? (
+          this.separateSection("Ready to Meet Rooms", readyTopic)
+        ) : (
+          <p style={{ display: "none" }} />
         )}
       </div>
     );

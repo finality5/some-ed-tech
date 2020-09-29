@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import auth from "../firebase";
+import { logout } from "../firebase/authService";
 import { Button, Icon } from "semantic-ui-react";
 const UserInformationBox = styled.div`
   display: flex;
@@ -62,18 +62,7 @@ const StyledButton = styled(Button)`
 `;
 class UserInformation extends Component {
   state = {};
-  handleLogout = () => {
-    auth
-      .signOut()
-      .then(() => {
-        window.location = "/login";
-        localStorage.removeItem("token");
-        this.setState({ displayName: "" });
-      })
-      .catch((err) => {
-        console.log("err", err);
-      });
-  };
+
   handleSignIn = () => {
     window.location = "/login";
   };
@@ -82,10 +71,10 @@ class UserInformation extends Component {
     return displayName ? (
       <UserInformationBox>
         <StyledDisplayName>Logged In As : {displayName}</StyledDisplayName>
-        <StyledRank>
+        {/* <StyledRank>
           Rank : Platinum &nbsp;
           <Icon name="chess queen" />
-        </StyledRank>
+        </StyledRank> */}
         <StyledButton
           style={{
             alignSelf: "center",
@@ -101,9 +90,9 @@ class UserInformation extends Component {
         <StyledButton
           style={{ alignSelf: "center" }}
           color="red"
-          onClick={this.handleLogout}
+          onClick={logout}
         >
-          LOGOUT
+          Logout
         </StyledButton>
         <Icon
           name="angle down"
@@ -122,7 +111,7 @@ class UserInformation extends Component {
           color="green"
           onClick={this.handleSignIn}
         >
-          SIGN IN
+          Login
         </Button>
         <Icon
           name="angle down"

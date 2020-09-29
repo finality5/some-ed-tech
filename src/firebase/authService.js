@@ -1,5 +1,5 @@
 import auth from "../firebase";
-export default function login(email, password) {
+export function login(email, password) {
   auth
     .signInWithEmailAndPassword(email, password)
     .then(() => {
@@ -16,5 +16,18 @@ export default function login(email, password) {
     })
     .catch(() => {
       "login error.";
+    });
+}
+
+export function logout() {
+  auth
+    .signOut()
+    .then(() => {
+      window.location = "/login";
+      localStorage.removeItem("token");
+      this.setState({ displayName: "" });
+    })
+    .catch((err) => {
+      console.log("err", err);
     });
 }

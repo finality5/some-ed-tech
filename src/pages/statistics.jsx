@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Divider } from "semantic-ui-react";
+import NavBar from "../components/navBar";
+import UserInformation from "../components/userInformation";
 import {
   LineChartComponent,
   ScatterChartComponent,
@@ -7,6 +9,7 @@ import {
 } from "../components/chartComponents";
 class Statistics extends Component {
   state = {
+    displayName: "",
     lineChartData: [
       { name: "Time 1", humidity: 400, temperature: 2400, light: 2400 },
       { name: "Time 2", humidity: 800, temperature: 200, light: 2000 },
@@ -69,20 +72,39 @@ class Statistics extends Component {
       },
     ],
   };
-  constructor(props) {
-    super(props);
+  componentDidMount() {
     document.getElementById("body").className = "whiteTheme";
+  }
+
+  redirectToLogin = () => {
+    window.location = "./login";
+  };
+  componentWillReceiveProps({ user }) {
+    this.setState({
+      displayName: user,
+    });
   }
   render() {
     return (
       <div>
-        <Divider />
-        <LineChartComponent data={this.state.lineChartData} />
-        <Divider />
-        <ScatterChartComponent data={this.state.scatterChartData} />
-        <Divider />
-        <HistogramComponent data={this.state.histogramData} />
-        <Divider />
+        <NavBar isLoggedIn={this.state.displayName} />
+        <UserInformation displayName={this.state.displayName} />
+        {this.state.displayName ? (
+          <div>
+            <h2 style={{ marginLeft: "7rem", marginTop: "3rem" }}>
+              Instructor Statistics
+            </h2>
+            <Divider />
+            <LineChartComponent data={this.state.lineChartData} />
+            <Divider />
+            <ScatterChartComponent data={this.state.scatterChartData} />
+            <Divider />
+            <HistogramComponent data={this.state.histogramData} />
+            <Divider />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     );
   }

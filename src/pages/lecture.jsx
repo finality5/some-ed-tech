@@ -11,7 +11,7 @@ const StyledChatBox = styled.div`
   transition: 1s;
   cursor: pointer;
   color: #222f3e;
-  padding: 2rem;
+  padding: 1rem 2rem;
   animation: ${FadeIn} 0.5s linear;
   :hover {
     transform: scale(1.1);
@@ -35,7 +35,7 @@ const RecommendZone = styled.div`
   margin-top: 3rem;
 `;
 
-class Lecture extends Component {
+class LectureAudience extends Component {
   state = {
     displayName: "",
     openChatRoom: false,
@@ -143,4 +143,4 @@ class Lecture extends Component {
   }
 }
 
-export default Lecture;
+export default LectureAudience;

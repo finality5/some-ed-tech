@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
+import CreateRoom from "./pages/createRoom";
 import Login from "./pages/login";
 import Lecture from "./pages/lecture";
 import Register from "./pages/register";
@@ -24,7 +25,6 @@ class App extends Component {
           .catch(() => {
             console.log("cannot set localstorage token");
           });
-
         this.setState({
           user: user.displayName,
         });
@@ -44,23 +44,35 @@ class App extends Component {
           render={(props) => <Login {...props} user={this.state.user} />}
         />
         <Route path="/register" component={Register} />
-
         <Route
           path="/role"
           render={(props) => <SelectRole {...props} user={this.state.user} />}
         />
         <Route
+          path="/createroom"
+          render={(props) => <CreateRoom {...props} user={this.state.user} />}
+        />
+        <Route
           path="/room"
           render={(props) => <SelectRoom {...props} user={this.state.user} />}
         />
+
         <Route
           path="/lecture"
           render={(props) => <Lecture {...props} user={this.state.user} />}
         />
+
         <Route
           path="/stat"
           render={(props) => <Statistics {...props} user={this.state.user} />}
         />
+        {/* <Route
+          path="/stat"
+          render={(props) => {
+            if (!this.state.user) return <Redirect to="/login" />;
+            return <Statistics {...props} user={this.state.user} />;
+          }}
+        /> */}
         <Route path="/not-found" component={NotFound} />
         <Redirect from="/" exact to="/role" />
         <Redirect to="/not-found" />

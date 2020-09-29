@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Input, Checkbox, Button, Icon } from "semantic-ui-react";
 import MessageComponent from "./messageComponent";
-import { FlexColumn, FadeIn } from "../sharedComponents"; 
+import { FlexColumn, FadeIn } from "../sharedComponents";
 const StyledChatBoxArea = styled(FlexColumn)`
-  position: absolute;
+  position: relative;
   align-items: center;
   margin-top: 3.5rem;
   animation: ${FadeIn} 0.5s linear;
+  min-width: 40rem;
 `;
 const StyledChatBox = styled.div`
   background-color: ${(props) => (props.isAnonymous ? "#2d3436" : "white")};
@@ -102,29 +103,45 @@ class ChatBox extends Component {
         </StyledHeader>
         <StyledChatBox isAnonymous={isAnonymous}>
           <MessageComponent
-            owner="Speaker1"
+            owner="John Adam"
             text="Hello !"
             onReply={onReply}
             onDelete={onDelete}
             isAnonymous={isAnonymous}
           />
           <MessageComponent
-            owner="Speaker2"
-            text="Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yovu repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?v"
+            owner="Chalee Christ"
+            text="Hi !"
+            onReply={onReply}
+            onDelete={onDelete}
+            isAnonymous={isAnonymous}
+          />
+          <MessageComponent
+            owner="Anonymous"
+            text="Guys, Could you repeat step 7.14 for me ?"
             onReply={onReply}
             onDelete={onDelete}
             isAnonymous={isAnonymous}
           />
           <MessageComponent
             owner="Speaker2"
-            text="Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yovu repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?v"
+            text="Sure, In mathematics, a Fourier transform (FT) is a mathematical transform that decomposes a function (often a function of time, or a signal) into its constituent frequencies, such as the expression of a musical chord in terms of the volumes and frequencies of its constituent notes. The term Fourier transform refers to both the frequency domain representation and the mathematical operation that associates the frequency domain representation to a function of time."
             onReply={onReply}
             onDelete={onDelete}
             isAnonymous={isAnonymous}
           />
           <MessageComponent
-            owner="Speaker2"
-            text="Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yoep 7.14 ?Could you repeat step 7.14 ?Could yovu repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?Could you repeat step 7.14 ?v"
+            owner="Anonymous"
+            text="That's Wrong bro !,  The Fourier transform of a function of time is a complex-valued function of frequency, whose magnitude (absolute value) represents the amount of that frequency present in the original function, and whose argument is the phase offset of the basic sinusoid in that frequency. The Fourier transform is not limited to functions of time, but the domain of the original function is commonly referred to as the time domain. There is also an inverse Fourier transform that mathematically synthesizes the original function from its frequency domain representation, as proven by the Fourier inversion theorem. A reason for the negative sign in the exponent is that it is common in electrical engineering to represent by {\displaystyle f(x)=e^{2\pi i\xi _{0}x}}{\displaystyle f(x)=e^{2\pi i\xi _{0}x}} a signal with zero initial phase and frequency {\displaystyle \xi _{0}.}{\displaystyle \xi _{0}.}[3][remark 5] The negative sign convention causes the product {\displaystyle e^{2\pi i\xi _{0}x}e^{-2\pi i\xi x}}{\displaystyle e^{2\pi i\xi _{0}x}e^{-2\pi i\xi x}} to be 1 (frequency zero) when {\displaystyle \xi =\xi _{0},}{\displaystyle \xi =\xi _{0},} causing the integral to diverge. The result is a Dirac delta function at {\displaystyle \xi =\xi _{0}}{\displaystyle \xi =\xi _{0}}, which is the only frequency component of the sinusoidal signal {\displaystyle e^{2\pi i\xi _{0}x}.}{\displaystyle e^{2\pi i\xi _{0}x}.}
+
+When the independent variable x represents time, the transform variable ξ represents frequency (e.g. if time is measured in seconds, then frequency is in hertz). Under suitable conditions, f is determined by {\displaystyle {\hat {f}}}{\hat {f}} via the inverse transform:"
+            onReply={onReply}
+            onDelete={onDelete}
+            isAnonymous={isAnonymous}
+          />{" "}
+          <MessageComponent
+            owner="Anonymous"
+            text="Thanks."
             onReply={onReply}
             onDelete={onDelete}
             isAnonymous={isAnonymous}

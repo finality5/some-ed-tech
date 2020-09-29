@@ -86,7 +86,6 @@ class Register extends Component {
     this.setState({ account });
   };
   render() {
-    console.log(this.state.account.displayName.length);
     return (
       <OutSideBox>
         <RegisterForm

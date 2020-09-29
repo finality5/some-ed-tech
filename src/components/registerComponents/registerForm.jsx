@@ -18,6 +18,7 @@ const FormBoxArea = styled.div`
   border-radius: 20px;
   box-shadow: 0px 0px 10px #7ed6df;
   animation: ${FadeIn} 1s linear both;
+  background-color: white;
   @media (max-width: 850px) {
     width: 65%;
   }

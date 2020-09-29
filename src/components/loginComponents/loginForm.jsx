@@ -1,7 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import note from "../../assets/images/note.svg";
-import hat from "../../assets/images/hat.svg";
 import { Link } from "react-router-dom";
 import { FadeIn } from "../sharedComponents";
 import { Icon, Form, Divider, Button } from "semantic-ui-react";

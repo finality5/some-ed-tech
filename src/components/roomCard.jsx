@@ -94,13 +94,15 @@ class RoomCard extends Component {
           margin: "1rem 1rem",
           borderRadius: "2rem",
           boxShadow:
-            roomStatus === "running"
+            roomStatus === "running" || roomStatus === "ready"
               ? "0px 0px 12px lightgreen"
               : roomStatus === "idle"
               ? "0px 0px 12px #82ccdd"
               : "0px 0px 12px #f8c291",
         }}
-        running={roomStatus === "running" ? true : false}
+        running={
+          roomStatus === "running" || roomStatus === "ready" ? true : false
+        }
       >
         <Card.Content>
           <ManageRoom
@@ -160,21 +162,26 @@ class RoomCard extends Component {
           &nbsp; {audienceCount} audiences are in this room.
           <RoomStatus>
             <Icon name="chat" /> &nbsp;Room Status : {roomStatus}
-            {roomStatus === "running" ? (
+            {roomStatus === "running" || roomStatus === "ready" ? (
               <RunningIconStatus name="bullseye" />
             ) : roomStatus === "deleted" ? (
               <DeletedIconStatus name="close" />
             ) : (
               <IdleIconStatus name="coffee" />
             )}
-            {roomStatus === "running" ? (
+            {roomStatus === "running" || roomStatus === "ready" ? (
               <div>
                 <Divider />
                 <StyledJoinButton
-                  content="JOIN"
+                  content={
+                    roomStatus === "running" ? "JOIN" : "Start  Meeting !"
+                  }
                   color="google plus"
                   fluid
-                  onClick={() => onJoin(id)}
+                  onClick={() => {
+                    if (roomStatus === "running") onJoin(id, "audience");
+                    else if (roomStatus === "ready") onJoin(id, "instructor");
+                  }}
                 />
               </div>
             ) : (

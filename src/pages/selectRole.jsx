@@ -33,6 +33,7 @@ class SelectRole extends Component {
     super(props);
     document.getElementById("body").className = "darkTheme";
   }
+
   componentWillReceiveProps({ user }) {
     this.setState({
       displayName: user,

@@ -38,21 +38,21 @@ const StyledDisplayName = styled.p`
     margin: 0rem 1rem 0rem 0rem;
   }
 `;
-const StyledRank = styled.p`
-  max-width: 20rem;
-  padding: 0.5rem;
-  display: block;
-  word-wrap: break-word;
-  margin: 0rem 3rem 0rem 0rem;
-  font-size: 1.1em;
-  font-weight: 500;
-  box-shadow: 0px 0px 10px #8e44ad;
-  border-radius: 0.75rem;
-  @media (max-width: 800px) {
-    font-size: 0.75em;
-    margin: 0rem 1rem 0rem 0rem;
-  }
-`;
+// const StyledRank = styled.p`
+//   max-width: 20rem;
+//   padding: 0.5rem;
+//   display: block;
+//   word-wrap: break-word;
+//   margin: 0rem 3rem 0rem 0rem;
+//   font-size: 1.1em;
+//   font-weight: 500;
+//   box-shadow: 0px 0px 10px #8e44ad;
+//   border-radius: 0.75rem;
+//   @media (max-width: 800px) {
+//     font-size: 0.75em;
+//     margin: 0rem 1rem 0rem 0rem;
+//   }
+// `;
 const StyledButton = styled(Button)`
   @media (max-width: 800px) {
     &.button {

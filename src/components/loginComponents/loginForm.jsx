@@ -41,18 +41,18 @@ const InformationBox = styled.div`
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
   font-weight: 600;
 `;
-const StyledHat = styled.img`
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  left: 10rem;
-`;
-const StyledNote = styled.img`
-  position: absolute;
-  right: 10rem;
-  width: 50px;
-  height: 50px;
-`;
+// const StyledHat = styled.img`
+//   position: absolute;
+//   width: 50px;
+//   height: 50px;
+//   left: 10rem;
+// `;
+// const StyledNote = styled.img`
+//   position: absolute;
+//   right: 10rem;
+//   width: 50px;
+//   height: 50px;
+// `;
 class LoginForm extends CreateForm {
   render() {
     const {

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Icon } from "semantic-ui-react";
 const StyledMessage = styled.div`
@@ -39,14 +39,14 @@ const StyledInformation = styled.div`
 const StyledOwner = styled.div`
   font-weight: 500;
 `;
-const StyledLike = styled(Icon)`
-  &.icon {
-    /* position: absolute; */
-    color: salmon;
-    right: 0;
-    bottom: 0;
-  }
-`;
+// const StyledLike = styled(Icon)`
+//   &.icon {
+//     /* position: absolute; */
+//     color: salmon;
+//     right: 0;
+//     bottom: 0;
+//   }
+// `;
 const StyledText = styled.div``;
 const MessageComponent = ({ owner, text, isAnonymous, onReply, onDelete }) => {
   return (

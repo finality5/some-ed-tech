@@ -52,9 +52,9 @@ class Login extends Component {
     const toSet = { ...this.state.required };
     requiredList.map((v) => {
       if (this.state.account[v]) {
-        toSet[v] = false;
+        return toSet[v] = false;
       } else {
-        toSet[v] = true;
+        return toSet[v] = true;
       }
     });
     this.setState({ required: toSet });
